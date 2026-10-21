@@ -1,0 +1,28 @@
+# Keep CAD/manufacturing payloads byte-for-byte; normalize text intentionally.
+*.md text eol=lf
+*.py text eol=lf
+*.csv text eol=lf
+*.json text eol=lf
+*.kicad_pro text eol=lf
+*.kicad_pcb text eol=lf
+*.kicad_sch text eol=lf
+*.kicad_mod text eol=lf
+fp-lib-table text eol=lf
+*.SLDPRT binary
+*.SLDASM binary
+*.STL binary
+*.stl binary
+*.3mf binary
+*.zip binary
+*.step binary
+*.stp binary
+*.wrl binary
+*.gtl binary
+*.gbl binary
+*.gts binary
+*.gbs binary
+*.gto binary
+*.gbo binary
+*.gm1 binary
+*.drl binary
+*.gbrjob binary

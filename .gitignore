@@ -1,0 +1,26 @@
+# KiCad machine-local state, locks and automatic backups
+*.kicad_prl
+*.lck
+~*.kicad_*
+*-backups/
+**/.history/
+_autosave-*
+*.bak
+*.bck
+*.kicad_pcb-bak
+*.kicad_sch-bak
+*.kicad_pro-bak
+fp-info-cache
+
+# SolidWorks editor locks (native design files belong in the repo)
+~$*
+
+# Operating-system debris
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local tool output
+work/
+__pycache__/
+*.pyc
