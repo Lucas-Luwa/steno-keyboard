@@ -24,11 +24,25 @@ For CAD changes, edit the [SolidWorks source](mechanical/README.md#editable-soli
 4. Fit and solder the switches, then attach the keycaps.
 5. Inspect the joints and remove bridges. With power disconnected, check for a short between the USB supply and ground.
 
+### Solder the RGB LEDs
+
+Use conventional hand soldering, tinning **one pad first** for each LED:
+
+1. With power disconnected, check the LED's orientation against its pinout and the PCB footprint, then apply flux to the pads.
+2. Lightly tin one PCB pad.
+3. Hold the LED by its sides with tweezers. Reheat the tinned pad and position the LED flat against the board, aligning all four contacts with their pads.
+4. Let the first joint cool, then solder the diagonally opposite contact and the remaining two contacts.
+5. Inspect all four joints for bridges and unjoined contacts. Use brief heating and keep the iron clear of the LED's plastic body and light-emitting surface.
+
+The [LED alignment jig](mechanical/README.md#led-alignment-jig) was tried with all four pads pre-tinned, but it did not work as intended. Assembly returned to the one-pad-first method above. CAD and STL files for both the full-length and short jigs are retained as design references; printing a jig is not part of the assembly procedure.
+
 Parts on the PCB's underside need the orientation shown from that side. Use the [schematic](images/schematic.svg), [front layout](images/pcb-front.svg) and [back layout](images/pcb-back.svg) while assembling.
 
 ## 4. Power and configure the keyboard
 
-Connect over USB and check the controller and supply before enabling the LEDs. Apply the [Javelin hardware configuration](firmware/README.md), build and flash the firmware, and use a limited RGB brightness setting during initial operation.
+Connect over USB and check the controller and supply before enabling the LEDs. The [MicroPython LED tests](firmware/led-tests/README.md) can check the complete RGB chain before switches or Javelin are required; begin with the 16/255 RGB/chase test. The [prototype results](firmware/led-tests/results.md) record the later colour, brightness and pattern sessions.
+
+Then apply the [Javelin hardware configuration](firmware/README.md), build and flash the complete firmware/data setup, and use a limited RGB brightness setting during initial operation. Javelin replaces MicroPython; the Python diagnostic animations are not automatically installed as Javelin effects.
 
 Test every matrix position and its assigned steno or auxiliary action. Exercise simultaneous chords, release timing, all eight LEDs and a USB disconnect/reconnect. Keep total current within the USB supply budget.
 

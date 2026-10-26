@@ -1,0 +1,6 @@
+name: javelin_steno_script
+environment:
+  sdk: '>=3.13.0 <4.0.0'
+dependencies:
+  crclib: 3.0.0
+  collection: ^1.19.1

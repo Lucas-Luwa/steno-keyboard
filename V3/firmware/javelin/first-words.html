@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Steno V3 · First words</title>
+<style>
+:root{color-scheme:dark;font:17px system-ui;background:#111823;color:#e8edf5}body{max-width:1000px;margin:40px auto;padding:0 28px}h1{font-size:32px;margin-bottom:8px}.sub{color:#a9bdd5}section{background:#1b2738;border:1px solid #34465f;border-radius:14px;padding:24px;margin-top:24px}.halves{display:flex;gap:42px;justify-content:center;flex-wrap:wrap}.half{display:grid;grid-template-columns:repeat(6,52px);gap:7px}.key{background:#26364b;border:1px solid #57708e;border-bottom-width:4px;border-radius:6px;padding:13px 0;text-align:center}.aux{color:#a6b8cf}.h,.l{border-color:#b692f6;color:#d7baff}.thumbs{margin-top:12px;display:flex;gap:100px;justify-content:center}.thumbs span{letter-spacing:16px}textarea{box-sizing:border-box;width:100%;height:150px;background:#0e1520;color:#fff;border:2px solid #83b2ff;border-radius:8px;font:25px system-ui;padding:16px;resize:vertical}li{margin:12px 0;line-height:1.5}strong{color:#d7baff}button{padding:10px 18px;font:inherit;background:#314b6e;color:#fff;border:1px solid #7796bf;border-radius:7px;cursor:pointer}.status{font-size:14px;color:#9bb1cc;min-height:22px}a{color:#9cc3ff}kbd{background:#2a3c55;padding:2px 6px;border-radius:4px}
+</style>
+<h1>Your first words on Steno V3</h1><div class="sub">Javelin + Lapwing · USB at the top · release every key to finish a stroke</div>
+<section aria-label="Keyboard layout"><div class="halves"><div class="half">
+<span class="key aux">Esc</span><span class="key">#</span><span class="key">T</span><span class="key">P</span><span class="key h">H</span><span class="key">*</span>
+<span class="key aux">Tab</span><span class="key">S</span><span class="key">K</span><span class="key">W</span><span class="key">R</span><span class="key">*</span></div><div class="half">
+<span class="key">*</span><span class="key">F</span><span class="key">P</span><span class="key l">L</span><span class="key">T</span><span class="key">D</span>
+<span class="key">*</span><span class="key">R</span><span class="key">B</span><span class="key">G</span><span class="key">S</span><span class="key">Z</span></div></div>
+<div class="thumbs"><span># A O</span><span>E U #</span></div></section>
+<section><ol>
+<li>Click the typing box below with your mouse.</li>
+<li>Tap <strong>S</strong>: left-hand lower row, <strong>second key from the left</strong>. Expect <strong>is</strong>.</li>
+<li>Tap <strong>T</strong>: left-hand upper row, <strong>third key from the left</strong>. Expect <strong>it</strong>.</li>
+<li>Press the purple <strong>H and L together</strong>, then release both. H = left upper row, fifth key. L = right upper row, fourth key. Expect <strong>hello</strong>.</li>
+<li>Tap any <strong>*</strong> to undo the last stroke. Expect <strong>hello</strong> to disappear.</li>
+</ol>
+<label for="words">Typing box</label><textarea id="words" spellcheck="false" placeholder="Click here, then use your steno board…"></textarea>
+<p class="status" id="status">Everything typed here stays in this local page.</p><button id="clear">Clear test box</button></section>
+<p class="sub">Esc and Tab are your two extra far-left switches. LEDs start off in this first Javelin setup. The light demos are saved separately in the repo.</p>
+<p><a href="https://lapwing.aerick.ca/">Learn Lapwing</a> · <a href="https://lim.au/#/software/javelin-steno">Javelin tools</a></p>
+<script>const words=document.querySelector('#words');words.addEventListener('input',()=>{document.querySelector('#status').textContent='Current text: '+JSON.stringify(words.value)});document.querySelector('#clear').onclick=()=>{words.value='';words.dispatchEvent(new Event('input'));words.focus()};</script>
+</html>
