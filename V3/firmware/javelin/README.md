@@ -1,20 +1,34 @@
 # Steno V3 Javelin / Lapwing
 
-Prepared 2026-10-25 for the Waveshare RP2040-Plus **16 MB** prototype. The custom hardware firmware and 31-button script compile successfully, and a combined Lapwing UF2 has passed offline image checks. **Installed on the prototype on 2026-10-25.** USB enumeration, custom configuration, all-up trigger, Repeat processing, US Windows Alt host layout, dictionary states, saved script read-back and on-device lookups passed. The builder also confirmed the physical S, T and H-L typing sequence produced “is it hello”. The [MicroPython LED tests](../led-tests/README.md) are separate firmware; their 134-cue showcase and 35-cue extension have already run on the prototype.
+Prepared 2026-10-25 for the Waveshare RP2040-Plus **16 MB** prototype. The custom hardware firmware and 31-button script compile successfully, and a combined Lapwing UF2 has passed offline image checks. The active v2 layout is described below. **Installed on the prototype on 2026-10-25.** USB enumeration, custom configuration, all-up trigger, Repeat processing, US Windows Alt host layout, dictionary states, saved script read-back and on-device lookups passed. The builder also confirmed the physical S, T and H-L typing sequence produced “is it hello”. The [MicroPython LED tests](../led-tests/README.md) are separate firmware; their 134-cue showcase and 35-cue extension have already run on the prototype.
 
-## Physical layout
+## Physical layout — v2
 
-Viewed from the typing side, USB at the top:
+Applied 2026-10-25 after the initial layout. Viewed from the typing side, USB at the top:
 
 ```text
-Esc  #  T  P  H  *       *  F  P  L  T  D
-Tab  S  K  W  R  *       *  R  B  G  S  Z
-         #  A  O         E  U  #
+Tab  S  T  P  H  #       *  F  P  L  T  D
+Ent  S  K  W  R  #       *  R  B  G  S  Z
+        Fn  A  O         E  U  Bsp
 ```
 
-Esc is SW1 and Tab is SW7. The top S position (SW2) acts as # through the engine key map; the lower S (SW8) remains S. Both outer thumb keys act as #. All four star keys have independent physical indexes. BOOTSEL uses index 28 and enters the ROM bootloader. It is separate from the 30 keyboard switches. [key-matrix.csv](key-matrix.csv) maps each switch to its electrical position and Javelin button index; [layout.json](layout.json) defines the visual geometry embedded in the firmware.
+SW1 is Tab, SW7 is Enter, both S positions produce left S, both left inner keys are #, the two right inner keys remain *, SW25 is hold-Fn, and SW30 is ordinary Backspace. The four vowel positions stay A O E U. The upper/lower S keys retain separate physical steno identities, so overlapping them does not release the other prematurely. The engine configuration maps S1 to stroke bit 1 (left S). Asterisk remains steno undo; Backspace deletes characters.
 
-The [hardware header](steno_v3.h) scans GP0–GP4 as cathode rows and GP5–GP10 as pulled-up columns. Eight WS2812B LEDs use GP22. The [button script](steno_v3.jss) enables button-state events and sets all LEDs off at startup. The MicroPython animations and their current limiter are **not ported into this script**. Live laptop audio input and on-device FFT remain future software work.
+Fn is momentary. Holding the outer left thumb key selects:
+
+```text
+Esc  --  --  --  -- LED     Home PgUp  Up PgDn End Del
+Ent Ctrl Shft Alt Win --      -- Left Down Right Dim Brt
+        Fn  --  --          Spc Ins Bsp
+```
+
+Each key latches its action when pressed and releases that same action, even if Fn is released first. Release a steno chord before switching layers. Reserved `--` positions do nothing on Fn. The outer right thumb remains Backspace on both layers. LED toggle is Fn + upper-left #; dim/brighten are Fn + right-hand lower S/Z. Lighting starts off and uses steady magenta, with red/blue levels 16–128/255 in steps of 16 and a default of 64. The maximum estimated LED channel current is 160.63 mA for eight LEDs, excluding controller/idle draw; this is a command-based estimate, not a meter reading. Effects/FFT are separate future work.
+
+[key-matrix.csv](key-matrix.csv) maps switch references to Javelin indexes; [layout.json](layout.json) supplies visual geometry. The [hardware header](steno_v3.h) still scans GP0–GP4 cathode rows and GP5–GP10 pulled-up columns; GP22 drives eight LEDs. BOOTSEL stays index 28. This update changed the script, source storage and S1 config byte, not the hardware application or dictionaries.
+
+The compiled 690-byte v2 script passed checks using the upstream Javelin interpreter for every base/Fn position, overlapping S keys, layer release order, modifier chords, LED brightness bounds and all-off cleanup. On-device source read-back, unchanged dictionaries, embedded/all-up mode, startup globals and Lapwing lookups passed. **The builder confirmed the v2 physical checks passed: both S positions output “is”, outer-right-thumb Backspace removes a character, and hold-Fn + the upper far-left key sends Escape.** Other v2 physical layer positions and LED controls have interpreter coverage but were not individually confirmed by this physical check. The initial v1 “is it hello” physical test passed before this change.
+
+The [v1 script](previous/steno_v3-layout-v1.jss) is retained for rollback. Its S1 mapping must be restored to stroke bit 0 (#) when reverting; changing only its script is insufficient. The original complete v1 UF2 and a new complete v2 UF2 are saved with the setup deliverables. Both use the same hardware pins. Export any user dictionary before rebuilding or replacing data.
 
 ## Dictionary preset
 
@@ -68,15 +82,15 @@ Upstream repositories are distributed under their own licenses, including Javeli
    dart run bin/compile.dart ../steno_v3.jss ../steno_v3-script.bin
    ```
 
-   This emits a **458-byte JSS4 script for 31 buttons**, including Esc, Tab and BOOTSEL. A stock Uni v4 builder compiles only 29 buttons; using that bytecode unmodified would lose the two extra keys.
-4. In the official builder, select The Uni v4 **as a data-image template only**, add the Lapwing bundle, and use the preset above. Under expert options, select top S as # and leave inner # unchecked. Use **Load Script** to load `steno_v3.jss`; loading the file also supplies the matching source storage. Create and download a full firmware image. Do not flash that stock hardware image to this PCB.
+   This emits a **690-byte JSS4 script for 31 buttons**, including both layers and BOOTSEL. A stock Uni v4 builder compiles only 29 buttons; using that bytecode unmodified would lose the two extra keys.
+4. In the official builder, select The Uni v4 **as a data-image template only**, add the Lapwing bundle, and use the preset above. The v2 packager sets top S back to S and embeds the supplied custom script/source independently of the template’s layout options. Create and download a full firmware image. Do not flash that stock hardware image to this PCB.
 5. From this directory, combine the downloaded data with the custom hardware and 31-button script:
 
    ```powershell
-   python package.py --builder path/to/downloaded.uf2 --hardware path/to/javelin-steno-pico.bin --script steno_v3-script.bin --source steno_v3.jss --output steno-v3-javelin-lapwing.uf2
+   python package.py --builder path/to/downloaded.uf2 --hardware path/to/javelin-steno-pico.bin --script steno_v3-script.bin --source steno_v3.jss --output steno-v3-javelin-layout-v2.uf2 --top-s-as-s
    ```
 
-   The packager validates the RP2040 UF2 family/ranges, reset vector, compiled key handlers, dictionary states and completion timestamp, source storage, and config flags. It replaces the hardware and button bytecode and updates the source-storage CRC. It preserves the builder's system, word list, host layouts and dictionary data. It writes a SHA-256 sidecar and verifies the UF2 round trip. The tested combined file is 13,942,784 bytes; its data fits within the 16 MB flash. The 256 KB user-dictionary area at the end is initialized by Javelin on first boot.
+   The packager validates the RP2040 UF2 family/ranges, reset vector, compiled callback table, dictionary states and completion timestamp, source storage, and config flags. It replaces the hardware and button bytecode, sets S1’s stroke mapping, and stores the supplied script source with its matching bytecode CRC. It preserves the builder's system, word list, host layouts and dictionary data. It writes a SHA-256 sidecar and verifies the UF2 round trip. The combined data fits within the 16 MB flash. The 256 KB user-dictionary area at the end is initialized by Javelin on first boot.
 
 Use the local [first-word typing page](first-words.html) for the initial S, T, H-L and undo exercise.
 

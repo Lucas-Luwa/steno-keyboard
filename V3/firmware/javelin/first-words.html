@@ -6,21 +6,21 @@
 </style>
 <h1>Your first words on Steno V3</h1><div class="sub">Javelin + Lapwing · USB at the top · release every key to finish a stroke</div>
 <section aria-label="Keyboard layout"><div class="halves"><div class="half">
-<span class="key aux">Esc</span><span class="key">#</span><span class="key">T</span><span class="key">P</span><span class="key h">H</span><span class="key">*</span>
-<span class="key aux">Tab</span><span class="key">S</span><span class="key">K</span><span class="key">W</span><span class="key">R</span><span class="key">*</span></div><div class="half">
+<span class="key aux">Tab</span><span class="key">S</span><span class="key">T</span><span class="key">P</span><span class="key h">H</span><span class="key">#</span>
+<span class="key aux">Ent</span><span class="key">S</span><span class="key">K</span><span class="key">W</span><span class="key">R</span><span class="key">#</span></div><div class="half">
 <span class="key">*</span><span class="key">F</span><span class="key">P</span><span class="key l">L</span><span class="key">T</span><span class="key">D</span>
 <span class="key">*</span><span class="key">R</span><span class="key">B</span><span class="key">G</span><span class="key">S</span><span class="key">Z</span></div></div>
-<div class="thumbs"><span># A O</span><span>E U #</span></div></section>
+<div class="thumbs"><span>Fn A O</span><span>E U Bsp</span></div></section>
 <section><ol>
 <li>Click the typing box below with your mouse.</li>
 <li>Tap <strong>S</strong>: left-hand lower row, <strong>second key from the left</strong>. Expect <strong>is</strong>.</li>
 <li>Tap <strong>T</strong>: left-hand upper row, <strong>third key from the left</strong>. Expect <strong>it</strong>.</li>
 <li>Press the purple <strong>H and L together</strong>, then release both. H = left upper row, fifth key. L = right upper row, fourth key. Expect <strong>hello</strong>.</li>
-<li>Tap any <strong>*</strong> to undo the last stroke. Expect <strong>hello</strong> to disappear.</li>
+<li>Tap either right-side <strong>*</strong> to undo the last stroke. Expect <strong>hello</strong> to disappear.</li>
 </ol>
 <label for="words">Typing box</label><textarea id="words" spellcheck="false" placeholder="Click here, then use your steno board…"></textarea>
-<p class="status" id="status">Everything typed here stays in this local page.</p><button id="clear">Clear test box</button></section>
-<p class="sub">Esc and Tab are your two extra far-left switches. LEDs start off in this first Javelin setup. The light demos are saved separately in the repo.</p>
+<p class="status" id="key-status">Last key: none</p><p class="status" id="status">Everything typed here stays in this local page.</p><button id="clear">Clear test box</button></section>
+<p class="sub">Tab and Enter are the extra far-left switches. Fn + Tab sends Esc. Outer left thumb = Fn; outer right thumb = Backspace. LEDs start off in this first Javelin setup. The light demos are saved separately in the repo.</p>
 <p><a href="https://lapwing.aerick.ca/">Learn Lapwing</a> · <a href="https://lim.au/#/software/javelin-steno">Javelin tools</a></p>
-<script>const words=document.querySelector('#words');words.addEventListener('input',()=>{document.querySelector('#status').textContent='Current text: '+JSON.stringify(words.value)});document.querySelector('#clear').onclick=()=>{words.value='';words.dispatchEvent(new Event('input'));words.focus()};</script>
+<script>const words=document.querySelector('#words');document.addEventListener('keydown',e=>{document.querySelector('#key-status').textContent='Last key: '+e.key+(e.ctrlKey?' + Ctrl':'')+(e.shiftKey?' + Shift':'')+(e.altKey?' + Alt':'')+(e.metaKey?' + Windows':'')});words.addEventListener('input',()=>{document.querySelector('#status').textContent='Current text: '+JSON.stringify(words.value)});document.querySelector('#clear').onclick=()=>{words.value='';words.dispatchEvent(new Event('input'));words.focus()};</script>
 </html>

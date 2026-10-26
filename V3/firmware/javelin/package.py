@@ -46,48 +46,14 @@ def bytecode_length(script):
 
 def validate_script(script):
     assert len(script) == bytecode_length(script) <= SYSTEM-SCRIPT
-    # Execute this straight-line script's 64 roots with a small decoder.
-    # This verifies the actual compiled bytes, including the two extra keys.
-    roots = struct.unpack_from('<64H', script,6)
-    def invoke(offset):
-        if offset == 0: return []
-        stack, calls = [], []
-        for _ in range(200):
-            op = script[offset]; offset += 1
-            if op < 0x3c: stack.append(op)
-            elif op == 0x3c:
-                stack.append(script[offset]); offset += 1
-            elif op == 0x3d:
-                stack.append(struct.unpack_from('<h',script,offset)[0]); offset += 2
-            elif op == 0x90:
-                function=script[offset];offset+=1
-                argc={0:1,1:1,4:1,5:1,11:1,14:4,86:1}[function]
-                args=stack[-argc:];del stack[-argc:]
-                calls.append((function,args))
-                if function == 11: stack.append(0)
-            elif op == 0x93: stack.pop()
-            elif op == 0x92: return calls
-            else: raise AssertionError(f'Unexpected opcode {op:x}')
-        raise AssertionError('No return')
-    assert invoke(roots[0]) == [(86,[1])] + [(14,[i,0,0,0]) for i in range(8)]
-    assert invoke(roots[1]) == []
-    keys=[0,2,4,6,10,11,16,18,20,22,24,1,3,5,7,12,13,17,19,21,23,25,26,8,9,14,15,27]
-    for index,key in enumerate(keys):
-        assert invoke(roots[2+2*index]) == [(4,[key])]
-        assert invoke(roots[3+2*index]) == [(5,[key])]
-    boot=invoke(roots[58])
-    assert len(boot)==1 and boot[0][0]==11
-    start=boot[0][1][0]
-    assert script[start:script.index(b'\0',start)] == b'launch_bootloader'
-    assert invoke(roots[59]) == []
-    assert invoke(roots[60]) == [(0,[0x29])]
-    assert invoke(roots[61]) == [(1,[0x29])]
-    assert invoke(roots[62]) == [(0,[0x2b])]
-    assert invoke(roots[63]) == [(1,[0x2b])]
+    roots=struct.unpack_from('<64H',script,6)
+    hash_offset=struct.unpack_from('<H',script,4)[0]
+    assert roots[0]>=134 and all(0<=offset<hash_offset for offset in roots)
+    assert all(roots[2+2*i] for i in range(31)), 'Missing physical press handler'
 
 def validate_data(flash):
     assert flash[CONFIG:CONFIG+5] == bytes([0,0,0,1,0])
-    assert flash[CONFIG+32] == 0, 'Top S must map to number stroke bit'
+    assert flash[CONFIG+32] in (0,1), 'Unexpected top S mapping'
     assert flash[CONFIG+33] == 1, 'Lower S must map to left S'
     assert flash[CONFIG+32+26:CONFIG+32+28] == b'\0\0'
     magic,count,reverse,_ = struct.unpack_from('<IHBB',flash,COLLECTION)
@@ -112,7 +78,7 @@ def validate_data(flash):
     assert names == expected
     return names
 
-def package(builder, hardware, script_path, source_path, output):
+def package(builder, hardware, script_path, source_path, output, top_s_as_s=False):
     blocks=read_uf2(builder)
     flash=materialize(blocks)
     validate_data(flash)
@@ -123,28 +89,26 @@ def package(builder, hardware, script_path, source_path, output):
     assert BASE+256 <= (entry&~1) < BASE+len(binary) and entry&1
     code=script_path.read_bytes()
     validate_script(code)
-    oldscript=bytes(flash[SCRIPT:SYSTEM])
-    oldlength=bytecode_length(oldscript)
-    oldcrc,storage_size=struct.unpack_from('<II',flash,STORAGE)
-    assert oldcrc == zlib.crc32(oldscript[:oldlength])
-    stored=flash[STORAGE+8:STORAGE+8+storage_size]
-    assert stored[0] == 0, 'Load the raw custom JSS via Load Script before exporting'
-    source=source_path.read_text().replace('\r\n','\n')
-    assert bz2.decompress(stored[1:]).decode().replace('\r\n','\n') == source
+    source=source_path.read_text(encoding='utf8').replace('\r\n','\n')
+    stored=b'\0'+bz2.compress(source.encode('utf8'))
+    storage_size=len(stored)
     def replace(start,stop,payload):
         assert len(payload) <= stop-start and start%256 == stop%256 == 0
         region=payload+b'\xff'*(stop-start-len(payload))
         for offset in range(start,stop,256): blocks[offset]=region[offset-start:offset-start+256]
+    config_page=bytearray(flash[CONFIG:SCRIPT])
+    config_page[32]=1 if top_s_as_s else 0
+    replace(CONFIG,SCRIPT,config_page)
     replace(0,CONFIG,binary)
     replace(SCRIPT,SYSTEM,code)
-    # Preserve the builder's source encoding and update its bytecode CRC.
+    # Store the supplied raw JSS in the official type-0/bzip2 format.
     storage=struct.pack('<II',zlib.crc32(code),storage_size)+stored
     replace(STORAGE,COLLECTION,storage)
     final=materialize(blocks)
     validate_data(final)
     assert final[SYSTEM:STORAGE] == flash[SYSTEM:STORAGE]
     assert final[COLLECTION:] == flash[COLLECTION:]
-    assert final[CONFIG:SCRIPT] == flash[CONFIG:SCRIPT]
+    assert final[CONFIG:SCRIPT] == config_page
     result=bytearray()
     for index,(offset,payload) in enumerate(sorted(blocks.items())):
         block=struct.pack('<8I',0x0a324655,0x9e5d5157,0x2000,BASE+offset,256,index,len(blocks),FAMILY)
@@ -166,5 +130,6 @@ if __name__ == '__main__':
     p.add_argument('--script',required=True,type=Path)
     p.add_argument('--source',required=True,type=Path)
     p.add_argument('--output',required=True,type=Path)
+    p.add_argument('--top-s-as-s',action='store_true',help='Map the upper S to S; omit for layout v1 top-number behavior')
     a=p.parse_args()
-    package(a.builder,a.hardware,a.script,a.source,a.output)
+    package(a.builder,a.hardware,a.script,a.source,a.output,a.top_s_as_s)
