@@ -4,17 +4,30 @@ This guide covers parts, case printing, soldering, firmware configuration and fi
 
 ## 1. Gather the parts
 
-Use the [bill of materials](hardware/bom.csv) for the electronics. Add 30 Kailh Choc V1 keycaps, eight M2 mounting screws, eight M2 × 3 mm heat-set inserts with 3.2 mm outside diameter, a retaining band for the cap, and a USB-C data cable. Select screw lengths for the PCB, base and insert stack without bottoming out in the inserts.
+Use the [bill of materials](hardware/bom.csv) for the electronics. The case and assembly materials are:
 
-Use the component packages in the [electronics guide](hardware/README.md). Its package table connects assembly part names to the schematic labels.
+| Item | Specification |
+|---|---|
+| Keycaps | 30 Kailh Choc V1-compatible keycaps |
+| PCB mounting screws | **Eight M2 × 5 mm machine screws** |
+| Heat-set inserts | **Eight M2-thread inserts, 3 mm long and 3.2 mm outside diameter** |
+| Printed base, travel cap and insert coupon | **PLA** |
+| Cap retention | Rubber bands looped through the cap anchors and under the keyboard/base |
+| USB cable | USB-C data cable |
+
+The mounting stack uses the 5 mm screw length measured beneath the head: passing through the 1.6 mm PCB leaves approximately 3.4 mm entering the base. Seat the 3 mm insert flush at the PCB seating surface and keep the screw tip clear of the blind-hole floor. The 3.2 mm insert dimension is its outside diameter, not the installation-hole diameter.
+
+Use the [mechanical guide](mechanical/README.md#case-hardware-and-materials) for the hardware details and [saved print settings](mechanical/README.md#printer-jobs).
+
+Use the component packages in the [electronics guide](hardware/README.md). Its package table connects assembly part names to the schematic labels. The [sourcing note](hardware/README.md#parts-sourcing) identifies AliExpress, AIVON and RobotShop as the suppliers used for the prototype.
 
 ## 2. Print the case parts
 
-Open the [STL files](mechanical/README.md#stl-files) in your slicer, or use a matching [printer job](mechanical/README.md#printer-jobs). Set units to millimeters and select your printer, nozzle, material and build plate.
+Open the [STL files](mechanical/README.md#stl-files) in your slicer and select millimeters. For a Sovol SV06, use the [OrcaSlicer PLA settings and diagonal bed placement](mechanical/README.md#sv06-slicing-settings). [Bambu-specific printer jobs](mechanical/README.md#printer-jobs) are supplied for the base and insert coupon; slice the [current travel cap](mechanical/stl/travel-cap.stl) separately. Use G-code generated for your own printer.
 
 Print the insert coupon first. Install an insert into each hole size, allow it to cool and choose the fit that seats flush without bulging, spinning or pulling loose. Apply that hole fit to the base, then print the base and travel cap.
 
-For CAD changes, edit the [SolidWorks source](mechanical/README.md#editable-solidworks-files) and export only the printable body. Keep reference electronics and switches out of the STL.
+For CAD changes, use the [SolidWorks files](mechanical/README.md#editable-solidworks-files) and export only the printable body. The [current cap part](mechanical/solidworks/travel-cap.SLDPRT) is a standalone solid for direct editing or adding features. Keep reference electronics and switches out of the STL.
 
 ## 3. Assemble the electronics
 
@@ -54,6 +67,6 @@ Ensure the USB connector is accessible and the cable does not load the controlle
 
 ## 6. Fit the travel cap
 
-Place the cap over the keyboard and route the retaining band between the anchor and hook so it captures the keyboard/base. Seat the band behind the hook tip. Seat the cap on the case with clearance above the keycaps.
+Place the [current travel cap](mechanical/README.md#current-travel-cap) over the keyboard with clearance above the keycaps. Route the retaining band through the loops and onto a hook so it captures the keyboard/base, and seat it behind the hook tip. The cap includes two full-height loops, centered side hooks and an additional horizontal hook between the loops; choose the attachment path that holds the cap securely without pressing the keys.
 
 Remove and refit the cap, then tilt and gently jostle the closed assembly to check retention. The keyboard is ready for normal use when the controls, USB connection, LEDs, mounting and cap operate as described.

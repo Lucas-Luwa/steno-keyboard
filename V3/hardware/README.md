@@ -28,6 +28,18 @@ A1 uses the generic `RaspberryPi_Pico` symbol, footprint and 3D model. Fit the W
 
 Use the matrix's row/column coordinates when assigning firmware key actions. Electrical matrix positions are independent of physical keyboard rows.
 
+## Parts sourcing
+
+The prototype used these suppliers:
+
+| Item | Source |
+|---|---|
+| Electronic components and assembly hardware | AliExpress |
+| Custom PCB fabrication | AIVON |
+| Waveshare RP2040-Plus-16MB controller | RobotShop |
+
+Use the BOM values, package sizes and controller model when choosing parts. These suppliers identify the original sourcing; equivalent parts from other suppliers can be used when their specifications and pinouts match. See the [fabrication guide](../manufacturing/README.md) for the PCB ordering files.
+
 ## Component packages
 
 | Reference | Part / package | Schematic label |

@@ -2,7 +2,7 @@
 
 A custom 30-key stenography keyboard with a Waveshare RP2040-Plus 16 MB controller, Kailh Choc V1 switches, eight RGB LEDs, and a 3D-printed case with a removable travel cap.
 
-**[V3](V3/) is the latest version.** Earlier electronics designs and base meshes are in [archive/](archive/README.md).
+**[V3](V3/) is the latest version.** Earlier electronics designs and case exports are in [archive/](archive/README.md).
 
 ![Steno PCB](V3/images/pcb-front.png)
 
@@ -20,9 +20,11 @@ A custom 30-key stenography keyboard with a Waveshare RP2040-Plus 16 MB controll
 
 ## Design files
 
-The [mechanical guide](V3/mechanical/README.md) covers the editable base, protective cap, heat-set-insert coupon, full-length and short LED alignment jig references, keycap references and keyboard assemblies. There are **22 SolidWorks part files and 12 assembly files**, plus STEP references and printable meshes.
+The [mechanical guide](V3/mechanical/README.md) covers the editable base, protective cap, heat-set-insert coupon, full-length and short LED alignment jig references, keycap references and keyboard assemblies. There are **23 SolidWorks part files and 12 assembly files**, plus STEP references and printable meshes.
 
-For printing, start with [`case-bottom.stl`](V3/mechanical/stl/case-bottom.stl), [`travel-cap.stl`](V3/mechanical/stl/travel-cap.stl) and [`insert-test-coupon.stl`](V3/mechanical/stl/insert-test-coupon.stl). Printer jobs for A1, P1S and P2S are grouped under [`print-jobs/`](V3/mechanical/print-jobs/).
+For printing, start with [`case-bottom.stl`](V3/mechanical/stl/case-bottom.stl), [`travel-cap.stl`](V3/mechanical/stl/travel-cap.stl) and [`insert-test-coupon.stl`](V3/mechanical/stl/insert-test-coupon.stl). The [SV06/OrcaSlicer profile](V3/mechanical/README.md#sv06-slicing-settings) covers PLA settings and diagonal bed placement. Slice the current travel cap from its STL. Bambu-specific base and insert-coupon printer jobs for A1, P1S and P2S are grouped under [`print-jobs/`](V3/mechanical/print-jobs/).
+
+The [current travel cap](V3/mechanical/README.md#current-travel-cap) has 2.54 mm of added height, full-height loops, centered hooks and a horizontal center hook for the retaining band. Its [standalone SolidWorks part](V3/mechanical/solidworks/travel-cap.SLDPRT) and [STEP solid](V3/mechanical/step/travel-cap.step) are included alongside the STL.
 
 The [LED alignment jig approach](V3/mechanical/README.md#led-alignment-jig) did not work as intended during assembly. CAD and STL files for the full-length eight-opening jig and short four-opening jig are retained as design references. Assemble the LEDs using the [one-pad-first soldering method](V3/build-guide.md#solder-the-rgb-leds).
 
@@ -40,17 +42,23 @@ steno/
 │   │   ├── solidworks/ # Editable parts and assemblies
 │   │   ├── step/       # Neutral CAD references
 │   │   ├── stl/        # Case, coupon and LED jig reference meshes
-│   │   └── print-jobs/ # A1, P1S and P2S jobs
+│   │   └── print-jobs/ # A1, P1S and P2S base/coupon jobs
 │   ├── manufacturing/ # Fabrication ZIP and individual Gerbers/drills
 │   ├── firmware/       # Javelin hardware configuration and LED diagnostics
 │   └── images/         # Board diagrams and project images
-├── archive/            # Earlier electronics versions and base meshes
+├── archive/            # Earlier electronics versions and case exports
 └── third_party/        # Reference-asset credits and license texts
 ```
 
 ## Photos and code
 
-The design files, printable models, build documentation and MicroPython LED diagnostics are available here. The prototype completed the RGB/chase test, 134-cue showcase and 35-cue fast/fade tests at half and full channel levels; see the [LED results](V3/firmware/led-tests/results.md). The [custom Javelin/Lapwing configuration](V3/firmware/javelin/README.md) is now installed on the prototype, with its hardware header, 31-button script and build/packaging instructions included here. On-device configuration and dictionary lookups passed. Photos of the physical parts remain an addition for [`V3/images/`](V3/images/).
+The design files, printable models, build documentation and MicroPython LED diagnostics are available here. The prototype completed the RGB/chase test, 134-cue showcase and 35-cue fast/fade tests at half and full channel levels; see the [LED results](V3/firmware/led-tests/results.md). The [custom Javelin/Lapwing configuration](V3/firmware/javelin/README.md) is now installed on the prototype, with its hardware header, 31-button script and build/packaging instructions included here. The current script also provides [onboard ambient lighting](V3/firmware/javelin/README.md#onboard-lighting): Off and 20%/50%/100% brightness settings, five selectable idle patterns and a green typing indicator with a five-minute idle delay, without a PC helper. On-device configuration and dictionary lookups passed. Photos of the physical parts remain an addition for [`V3/images/`](V3/images/).
+
+## Build, modify and share
+
+You are welcome to build your own keyboard and improve the original designs. Original hardware is licensed under **CERN-OHL-P-2.0**, original project code under **MIT**, and original documentation and images under **CC BY 4.0**. Keep the applicable credit and license notices when sharing. See [LICENSE.md](LICENSE.md) for the scope and full terms.
+
+Third-party components keep their own licenses. In particular, Javelin's **PolyForm Noncommercial** terms still apply to its software and upstream-derived portions; the project licenses do not remove those conditions.
 
 ## Credits
 
