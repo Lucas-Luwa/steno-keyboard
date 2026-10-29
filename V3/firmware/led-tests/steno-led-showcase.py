@@ -88,11 +88,11 @@ for ident, title, params in (
     cue(ident, 'motion', title, 'chase', 7, **params)
 for ident, title, kind in (
     ('fill-drain', 'Fill then drain the row', 'fill'),
-    ('color-wipe', 'Colour wipe across all eight', 'wipe'),
+    ('color-wipe', 'Color wipe across all eight', 'wipe'),
     ('rainbow-conveyor', 'Moving saturated rainbow', 'rainbow'),
     ('gradient-conveyor', 'Moving purple/cyan gradient', 'gradient'),
     ('sine-wave', 'Smooth wave of brightness', 'sine'),
-    ('two-waves', 'Two overlapping coloured waves', 'two-waves'),
+    ('two-waves', 'Two overlapping colored waves', 'two-waves'),
     ('bouncing-particle', 'Smooth bouncing point with subpixel blending', 'particle'),
     ('random-walk', 'A dot wanders between neighbours', 'walk'),
     ('binary', 'Slow binary count in magenta', 'binary'),
@@ -100,17 +100,17 @@ for ident, title, kind in (
     cue(ident, 'motion', title, kind, 8)
 
 for ident, title, kind, params in (
-    ('mirror-out', 'Mirrored centre-to-edge dots', 'mirror', dict(inward=False)),
-    ('mirror-in', 'Mirrored edge-to-centre dots', 'mirror', dict(inward=True)),
-    ('mirror-comet', 'Mirrored centre-out comet trails', 'mirror', dict(trail=True)),
-    ('mirror-fill', 'Both halves fill out from the centre', 'mirror-fill', {}),
+    ('mirror-out', 'Mirrored center-to-edge dots', 'mirror', dict(inward=False)),
+    ('mirror-in', 'Mirrored edge-to-center dots', 'mirror', dict(inward=True)),
+    ('mirror-comet', 'Mirrored center-out comet trails', 'mirror', dict(trail=True)),
+    ('mirror-fill', 'Both halves fill out from the center', 'mirror-fill', {}),
     ('mirror-breathe', 'Both halves breathe together', 'breathe', {}),
     ('cross-breathe', 'Left and right take turns breathing', 'cross-breathe', {}),
-    ('alternate-banks', 'Left/right colour alternation', 'alternate', {}),
+    ('alternate-banks', 'Left/right color alternation', 'alternate', {}),
     ('split-colors', 'Purple left / cyan right', 'split', {}),
     ('checkerboard', 'Alternating individual LEDs', 'checker', {}),
     ('paired-zones', 'Four two-LED zones', 'zones', {}),
-    ('centre-glow', 'Centre glows with a soft falloff', 'centre', {}),
+    ('centre-glow', 'Center glows with a soft falloff', 'centre', {}),
     ('edges-glow', 'Outer edges glow with a soft falloff', 'edges', {}),
 ):
     cue(ident, 'symmetry', title, kind, 8, **params)
@@ -124,11 +124,11 @@ for ident, title, kind, params in (
     ('fire', 'Warm flickering embers', 'texture', dict(palette='fire')),
     ('ocean-shimmer', 'Blue/teal shimmer', 'texture', dict(palette='ocean')),
     ('aurora', 'Slow purple/green aurora', 'texture', dict(palette='aurora')),
-    ('sparkle-sparse', 'Sparse coloured sparkles', 'sparkle', dict(density=1)),
-    ('sparkle-dense', 'Dense coloured sparkles', 'sparkle', dict(density=3)),
+    ('sparkle-sparse', 'Sparse colored sparkles', 'sparkle', dict(density=1)),
+    ('sparkle-dense', 'Dense colored sparkles', 'sparkle', dict(density=3)),
     ('twinkle', 'Soft independent twinkles', 'twinkle', {}),
     ('raindrops', 'Drops appear and fade away', 'drops', {}),
-    ('random-colors', 'Random saturated colour per LED', 'random-colors', {}),
+    ('random-colors', 'Random saturated color per LED', 'random-colors', {}),
     ('noise-flow', 'Flowing multicolour texture', 'noise', {}),
 ):
     cue(ident, 'textures', title, kind, 10, **params)
@@ -138,7 +138,7 @@ for bpm in (60, 90, 120, 150, 180):
         'beat', 8, bpm=bpm, mode='pulse')
 for ident, title, mode in (
     ('beat-alternate', 'Alternate halves on each beat', 'alternate'),
-    ('beat-color', 'Choose a saturated colour on each beat', 'color'),
+    ('beat-color', 'Choose a saturated color on each beat', 'color'),
     ('beat-step', 'Advance one LED per beat', 'step'),
     ('beat-mirror', 'Launch a mirrored wave on each beat', 'mirror'),
     ('beat-burst', 'Random spatial burst on each beat', 'burst'),
@@ -162,7 +162,7 @@ for effect in ('chase', 'comet', 'wave', 'sparkle'):
         'detail', 12, effect=effect)
 
 for hz in (1, 2, 4, 8, 12, 16):
-    cue('flash-%dhz' % hz, 'flashes', 'Labelled magenta flashes: %d Hz' % hz,
+    cue('flash-%dhz' % hz, 'flashes', 'Labeled magenta flashes: %d Hz' % hz,
         'flash', 5, hz=hz, level=16 if hz >= 8 else 32)
 cue('flash-alternating', 'flashes', 'Alternating banks, four changes/second',
     'flash-alternate', 6, level=16)
@@ -472,7 +472,7 @@ class Driver:
         self.limited_frames = 0
 
     def show(self, frame, level):
-        # Keep the existing no-white preference even when interpolating colours.
+        # Keep the existing no-white preference even when interpolating colors.
         result = []
         for color in frame:
             c = [max(0, min(255, int(v))) for v in color]
@@ -514,7 +514,7 @@ def run(section=None, pattern=None, level=None, speed=1.0, repeat=1):
     if level is not None and not 1 <= level <= 255:
         raise ValueError('level must be 1..255')
     if level is not None and any(c['section'] in ('brightness', 'flashes') for c in chosen):
-        raise ValueError('Brightness and flash cues use their labelled fixed levels; omit level override')
+        raise ValueError('Brightness and flash cues use their labeled fixed levels; omit level override')
     if not 0.25 <= speed <= 4 or not 1 <= repeat <= 10:
         raise ValueError('speed must be 0.25..4 and repeat 1..10')
     driver = Driver()

@@ -2,6 +2,8 @@
 
 Copyright © 2026 Lucas and Steno contributors for original project contributions.
 
+## Build, modify and share
+
 You are welcome to build your own Steno keyboard, study the designs, make changes and share improvements. The original project materials are licensed as follows, subject to the third-party exceptions below:
 
 | Original project material | License |

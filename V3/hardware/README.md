@@ -2,6 +2,10 @@
 
 Open [`StenoV3.kicad_pro`](StenoV3.kicad_pro) in KiCad 10 with the standard symbol, footprint and 3D libraries installed.
 
+![Unpopulated Steno PCB seated in a green printed base](../images/pcb-unpopulated.jpg)
+
+Bare PCB before component installation. Follow the [illustrated build guide](../build-guide.md#3-assemble-the-electronics) for the populated board and switch stages.
+
 ## Circuit specifications
 
 | Item | Specification |
@@ -30,7 +34,7 @@ Use the matrix's row/column coordinates when assigning firmware key actions. Ele
 
 ## Parts sourcing
 
-The prototype used these suppliers:
+The parts for this build came from these suppliers:
 
 | Item | Source |
 |---|---|
@@ -38,7 +42,7 @@ The prototype used these suppliers:
 | Custom PCB fabrication | AIVON |
 | Waveshare RP2040-Plus-16MB controller | RobotShop |
 
-Use the BOM values, package sizes and controller model when choosing parts. These suppliers identify the original sourcing; equivalent parts from other suppliers can be used when their specifications and pinouts match. See the [fabrication guide](../manufacturing/README.md) for the PCB ordering files.
+PCB ordering files are in the [fabrication guide](../manufacturing/README.md).
 
 ## Component packages
 
@@ -50,7 +54,7 @@ Use the BOM values, package sizes and controller model when choosing parts. Thes
 | U1 | Single buffer, **SOT-23-5**; see buffer options below | `74AHCT1G125` |
 | F1 | MF_MSMF050-2 resettable fuse, **1812** | `MF_MSMF050-2` |
 
-The component/package column identifies the assembly part; the schematic-label column connects it to the names in the design files. Match the package to the footprint when ordering. For the diode's package and cathode marking, see the [1N4148WS datasheet](https://www.diodes.com/datasheet/download/1N4148WS.pdf).
+Diode package and cathode marking: [1N4148WS datasheet](https://www.diodes.com/datasheet/download/1N4148WS.pdf).
 
 ## LED buffer
 
@@ -70,10 +74,16 @@ The SOT-23-5 options are **74AHCT1G125** and **SN74LV1T34DBVR**. Pin 1 grounds t
 
 Scan GP0–GP4 as cathode rows, selecting one row low at a time and reading GP5–GP10 with pull-ups. Leave unselected rows inactive.
 
-The RGB chain is **LED17 → LED16 → LED15 → LED14 → LED13 → LED12 → LED8 → LED28**. Apply a firmware brightness cap to the complete chain, including startup effects, and keep total keyboard current within the USB supply budget.
+The RGB chain is **LED17 → LED16 → LED15 → LED14 → LED13 → LED12 → LED8 → LED28**. The [lighting configuration](../firmware/javelin/README.md#onboard-lighting) includes the firmware's estimated LED-current limit.
+
+## Board views
+
+![Steno PCB front layout render](../images/pcb-front.png)
+
+Use the [front layout](../images/pcb-front.svg), [back layout](../images/pcb-back.svg) and [schematic](../images/schematic.svg) to identify pads and component orientations.
 
 ## Libraries and models
 
-The custom Choc footprint is under `libraries/`; the footprint table uses a project-relative path. Switch and fuse models are under `models/`. Standard models use `${KICAD10_3DMODEL_DIR}`. The board has no display.
+The custom Choc footprint is under `libraries/`; the footprint table uses a project-relative path. Switch and fuse models are under `models/`. Standard models use `${KICAD10_3DMODEL_DIR}`.
 
 Continue with the [build guide](../build-guide.md) or [firmware configuration](../firmware/README.md).

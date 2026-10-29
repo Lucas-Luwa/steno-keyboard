@@ -1,5 +1,5 @@
 """Optional fast extension; execute after steno-led-showcase.py in its namespace.
-Original catalogue and settings are preserved. New cues default to 128/255; the launcher can override this.
+Original catalog and settings are preserved. New cues default to 128/255; the launcher can override this.
 """
 _BASE_FRAME_FOR = frame_for
 FRAME_MS = 5
@@ -14,34 +14,34 @@ energy_cue('energy-fade-slow', 'Smooth fade in/out: zero to selected peak', 'fad
 energy_cue('energy-fade-fast', 'Fast fade in/out: two pulses per second', 'fade', rate=2)
 energy_cue('energy-attack-decay', 'Sharp attack with a fading tail', 'decay', rate=4)
 energy_cue('energy-crossfade', 'Left and right crossfade', 'crossfade', rate=2)
-energy_cue('energy-colour-fade', 'Rapid smooth saturated colour fades', 'colour-fade', rate=2)
+energy_cue('energy-colour-fade', 'Rapid smooth saturated color fades', 'colour-fade', rate=2)
 for rate in (12, 24, 40):
     energy_cue('energy-out-%d' % rate, '4+5, 3+6, 2+7, 1+8: %d pair steps/sec' % rate,
                'stripes', rate=rate)
 energy_cue('energy-in', 'Outside-in pairs: 24 steps/sec', 'stripes', rate=24, inward=True)
-energy_cue('energy-pingpong', 'Centre-out then edge-in: 24 steps/sec', 'stripes', rate=24, bounce=True)
-energy_cue('energy-fill', 'Pairs rapidly fill out from the centre', 'stripes', rate=24, fill=True)
-energy_cue('energy-stripe-trails', 'Centre-out pairs with fading trails', 'stripes', rate=24, trail=True)
-energy_cue('energy-stripe-rainbow', 'Centre-out pairs cycle saturated hues', 'stripes', rate=24, hue=True)
-energy_cue('energy-stripe-random', 'Centre-out pairs change to a random colour each sweep', 'stripes', rate=24, random_color=True)
+energy_cue('energy-pingpong', 'Center-out then edge-in: 24 steps/sec', 'stripes', rate=24, bounce=True)
+energy_cue('energy-fill', 'Pairs rapidly fill out from the center', 'stripes', rate=24, fill=True)
+energy_cue('energy-stripe-trails', 'Center-out pairs with fading trails', 'stripes', rate=24, trail=True)
+energy_cue('energy-stripe-rainbow', 'Center-out pairs cycle saturated hues', 'stripes', rate=24, hue=True)
+energy_cue('energy-stripe-random', 'Center-out pairs change to a random color each sweep', 'stripes', rate=24, random_color=True)
 for rate in (16, 32, 64):
     energy_cue('energy-chase-%d' % rate, 'Fast chase: %d LED positions/sec' % rate, 'chase', rate=rate)
 energy_cue('energy-scanner', 'Fast bouncing scanner: 40 positions/sec', 'scanner', rate=40)
-energy_cue('energy-comets', 'Opposing coloured comets: 32 positions/sec', 'comets', rate=32)
+energy_cue('energy-comets', 'Opposing colored comets: 32 positions/sec', 'comets', rate=32)
 energy_cue('energy-opposed', 'Opposing dots: 32 positions/sec', 'opposed', rate=32)
-energy_cue('energy-colour-12', 'Whole row switches random colours 12 times/sec', 'random-colour', rate=12)
-energy_cue('energy-colour-24', 'Whole row switches random colours 24 times/sec', 'random-colour', rate=24)
+energy_cue('energy-colour-12', 'Whole row switches random colors 12 times/sec', 'random-colour', rate=12)
+energy_cue('energy-colour-24', 'Whole row switches random colors 24 times/sec', 'random-colour', rate=24)
 energy_cue('energy-random-pixels', 'All pixels change independently 24 times/sec', 'random-pixels', rate=24)
-energy_cue('energy-bursts', 'Random coloured spatial bursts 16 times/sec', 'bursts', rate=16)
-energy_cue('energy-sparkles', 'Rapid isolated coloured sparks: 40 updates/sec', 'sparkles', rate=40)
-energy_cue('energy-alternate', 'Rapid left/right colour alternation', 'alternate', rate=12)
+energy_cue('energy-bursts', 'Random colored spatial bursts 16 times/sec', 'bursts', rate=16)
+energy_cue('energy-sparkles', 'Rapid isolated colored sparks: 40 updates/sec', 'sparkles', rate=40)
+energy_cue('energy-alternate', 'Rapid left/right color alternation', 'alternate', rate=12)
 energy_cue('energy-180', '180 BPM sixteenth-note motion', 'rhythm', bpm=180, subdivision=4)
 energy_cue('energy-220', '220 BPM sixteenth-note motion', 'rhythm', bpm=220, subdivision=4)
 energy_cue('energy-triplets', '200 BPM triplet motion', 'rhythm', bpm=200, subdivision=3)
-energy_cue('energy-build-drop', 'Accelerating stripes, dark gap, then coloured bursts', 'build-drop', 8)
+energy_cue('energy-build-drop', 'Accelerating stripes, dark gap, then colored bursts', 'build-drop', 8)
 for rate in (8, 12, 16):
     energy_cue('energy-strobe-%d' % rate, 'Magenta flashes: %d Hz' % rate, 'strobe', rate=rate)
-energy_cue('energy-burst-strobe', 'Random-colour double/triple flash bursts', 'burst-strobe', rate=4)
+energy_cue('energy-burst-strobe', 'Random-color double/triple flash bursts', 'burst-strobe', rate=4)
 energy_cue('energy-mix', 'Rapid pattern switching: stripes/chase/bursts/sparkles', 'mix', 8)
 SECTIONS = SECTIONS + ('energy',)
 ENERGY_CATALOG = CATALOG[ENERGY_START:]

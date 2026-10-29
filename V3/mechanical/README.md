@@ -1,15 +1,19 @@
 # Mechanical design and printing
 
-This folder contains the case base, protective travel cap, heat-set-insert coupon, full-length and short LED alignment jig references, keycap references and keyboard assemblies. Use native CAD to edit features, STEP for reference geometry, STL to prepare your own prints, or a printer job for the matching setup.
+The case base and travel cap are supplied as editable CAD and printable models. This folder also includes an insert-fit coupon, LED alignment jig references, keycap references and keyboard assemblies.
+
+<img src="../images/case-and-cover-parts.jpg" alt="Pink-faced travel cover and two separate example pink case bases" width="640">
+
+Travel cover with two example case bases.
 
 ## File formats
 
 | Folder | Contents | Use |
 |---|---|---|
-| [`solidworks/`](solidworks/) | 23 `.SLDPRT` files and 12 `.SLDASM` files | Edit parts and work with the keyboard assembly |
+| [`solidworks/`](solidworks/) | SolidWorks parts (`.SLDPRT`) and assemblies (`.SLDASM`) | Edit parts and work with the keyboard assembly |
 | [`step/`](step/) | Travel cap, PCB assembly and keycap STEP files | Exchange cap geometry and position references in CAD |
 | [`stl/`](stl/) | Base, travel cap, insert coupon and two LED jig references | Slice printable geometry |
-| [`print-jobs/`](print-jobs/) | Six base/coupon jobs, grouped by A1/P1S/P2S | Print using a matching printer setup |
+| [`print-jobs/`](print-jobs/) | Base and insert-coupon jobs for A1, P1S and P2S | Print using a matching printer setup |
 
 Earlier base and cap meshes, plus jobs for the previous cap, are in [`archive/prints/`](../../archive/prints/), described in the [archive guide](../../archive/README.md).
 
@@ -30,17 +34,17 @@ Earlier base and cap meshes, plus jobs for the previous cap, are in [`archive/pr
 
 The directory also contains PCB, controller, switch, terminal, LED, diode, resistor, capacitor, fuse and buffer-package models used with these assemblies. Files ending in `.step.SLDPRT` or `.step.SLDASM` are native representations of those components.
 
-Keep the SolidWorks files together. If prompted for an external reference, select the corresponding component in `solidworks/` or a STEP reference below. Use SolidWorks Pack and Go when making a separately linked assembly copy or renaming dependencies.
+The assemblies reference components in `solidworks/` and `step/`. Use SolidWorks Pack and Go when copying or renaming linked CAD files.
 
-To export a printable part, save the edit and export only its printable body as an STL in **millimeters**. Exclude the PCB, switches and other reference bodies. STL stores a surface mesh, not editable feature history.
+For print exports, select only the printable body and use **millimeters**; the native models can also contain reference electronics and switches.
 
 ## Current travel cap
 
 Use [travel-cap.SLDPRT](solidworks/travel-cap.SLDPRT), [travel-cap.step](step/travel-cap.step) or [travel-cap.stl](stl/travel-cap.stl) for the current cover. These contain only the cap body. The SolidWorks file contains a standalone solid rather than the original sketch/feature history; use direct editing or add features for further changes.
 
-The cap adds **2.54 mm (0.1 inch) of height** over the previous design. The hooks and loops are on the opposite sides from the previous cap, the loops span the taller walls, and the hooks are centered vertically. A horizontal hook sits between the two loops to provide another retaining-band attachment point.
+The cap adds **2.54 mm (0.1") of height** over the previous design. The hooks and loops are on the opposite sides from the previous cap, the loops span the taller walls, and the hooks are centered vertically. A horizontal hook sits between the two loops to provide another retaining-band attachment point.
 
-Slice the current STL for your printer. After printing, check clearance above the keycaps and the retaining-band fit with the keyboard installed in its base. The earlier cap's mesh and sliced jobs are in the [archive guide](../../archive/README.md#previous-travel-cap).
+The earlier cap's mesh and sliced jobs are in the [archive guide](../../archive/README.md#previous-travel-cap).
 
 ## STEP references
 
@@ -48,11 +52,11 @@ Slice the current STL for your printer. After printing, check clearance above th
 - [`pcb-assembly.step`](step/pcb-assembly.step): PCB assembly for positioning the electronics inside the case.
 - [`Choc_Stem_Choc_Size_Normal.step`](step/Choc_Stem_Choc_Size_Normal.step): keycap reference geometry.
 
-The PCB model uses generic Pico geometry. Fit the Waveshare module with its USB-C socket aligned to the case opening. STEP files provide neutral CAD geometry; use native CAD when its feature history is needed. The current standalone cap is supplied as a solid in both native and STEP formats.
+The PCB assembly uses generic Pico reference geometry. The Waveshare controller fits with its USB-C socket aligned to the case opening.
 
 ## STL files
 
-STL has no unit field; select **millimeters** in the slicer.
+Mesh dimensions are in **millimeters**.
 
 | Model | Size (mm) | Purpose |
 |---|---|---|
@@ -62,10 +66,7 @@ STL has no unit field; select **millimeters** in the slicer.
 | [led-alignment-jig.stl](stl/led-alignment-jig.stl) | 245.447 × 30.873 × 3.175 | Full-length, eight-opening LED jig reference |
 | [led-alignment-jig-short.stl](stl/led-alignment-jig-short.stl) | 104.958 × 32.137 × 3.175 | Short, four-opening LED jig reference |
 
-1. Open the mesh and select your printer, nozzle, filament and build plate.
-2. Arrange it on the plate and account for any skirt or brim. Use center/arrange for the travel-cap mesh's offset origin.
-3. Inspect orientation, walls, blind-hole floors, insert holes and underside pockets in the sliced preview.
-4. Print the coupon, establish the insert fit, then print the base and cap.
+The travel-cap mesh has an offset origin. The insert coupon provides hole-size options for fitting the M2 heat-set inserts before printing the base.
 
 ## LED alignment jig
 
@@ -73,16 +74,16 @@ Two LED alignment jig designs are included: the [full-length jig](stl/led-alignm
 
 **The jig approach did not work as intended during assembly.** Assembly returned to conventional hand soldering without a jig: tin one pad, position and tack the LED, then solder the remaining three contacts. Follow the [LED soldering steps in the build guide](../build-guide.md#solder-the-rgb-leds).
 
-The [full-length SolidWorks part](solidworks/LEDAlignmentJig.SLDPRT), [short SolidWorks part](solidworks/LEDAlignmentJigShort.SLDPRT) and their STL files remain available as design references. Neither jig is required for assembly. The native parts include keyboard reference geometry; export only the jig body when creating a new STL. For inspecting or modifying either mesh in a slicer, use millimeters and drop its broad flat face onto the build plate to remove its Z offset.
+The [full-length SolidWorks part](solidworks/LEDAlignmentJig.SLDPRT), [short SolidWorks part](solidworks/LEDAlignmentJigShort.SLDPRT) and their STL files remain available as design references. Neither jig is required for assembly. The native parts include keyboard reference geometry; export only the jig body when creating a new STL. Both jig meshes have a Z offset; their broad flat face is the print-bed surface.
 
 ## SV06 slicing settings
 
-Use **OrcaSlicer with the standard Sovol SV06 profile and stock Marlin firmware**. The printer has a 220 × 220 × 250 mm build volume. Slice the STL files for this printer; the Bambu jobs below target different machines.
+The base was printed in PLA on a **Sovol SV06** using the following OrcaSlicer settings. Its 220 × 220 mm bed requires diagonal placement of the base and cap.
 
 | Setting | Case-printing profile |
 |---|---|
 | Material / nozzle | Generic PLA, 1.75 mm filament / 0.4 mm nozzle |
-| Nozzle / bed temperature | 220°C / 55°C; stay within the filament manufacturer's range |
+| Nozzle / bed temperature | 220°C / 55°C |
 | Layer height / first layer | 0.12 mm / 0.20 mm |
 | Walls / top / bottom layers | 3 / 3 / 3 |
 | Infill | 20% Triangles |
@@ -96,9 +97,11 @@ Use **OrcaSlicer with the standard Sovol SV06 profile and stock Marlin firmware*
 | Brim | Outer only, 5 mm wide, 0.10 mm object gap |
 | Travel planning | Avoid crossing walls enabled |
 
-Keep **Emit limits to G-code disabled** in the machine-limit settings. Use the SV06 profile's complete start routine, with homing (`G28`) followed by automatic mesh probing (`G29`) at the start of each print. Set Z offset for your own printer; it is not a transferable project dimension. Tune support placement to the selected part and orientation.
+Rotate the base and cap **approximately 45° in the XY plane** to fit the bed. Their rotated footprints are approximately **204 × 204 mm** and **206.5 × 206.5 mm**; with a 5 mm outer brim, these become about **214 × 214 mm** and **216.5 × 216.5 mm**.
 
-For the current base and cap, **rotate approximately 45° in the XY plane**, center the part and drop it onto the plate. Their rotated mesh footprints are approximately **204 × 204 mm** and **206.5 × 206.5 mm**; a 5 mm outer brim brings these to about **214 × 214 mm** and **216.5 × 216.5 mm**. Check the complete brim, supports and start/purge path against the usable bed area in Preview before printing. These footprints describe the geometry, not a supplied SV06 G-code file.
+<img src="../images/case-printing-sv06.jpg" alt="Green case base printing diagonally on the Sovol SV06 bed" width="360">
+
+The base printing diagonally on the Sovol SV06.
 
 ## Printer jobs
 
@@ -117,8 +120,6 @@ These `.gcode.3mf` files use the named printer's **Bambu PLA Basic** profile wit
 | Base | 5 | 20% gyroid | Automatic tree supports enabled |
 | Insert coupon | 3 | 15% gyroid | Automatic tree supports enabled |
 
-Open a job in Bambu Studio and match its printer, nozzle, material and plate to your setup. These settings describe the saved jobs; slicer support generation still depends on the part's geometry and orientation. The current travel cap is also a PLA part; slice its current STL separately. For different hardware or edited geometry, reslice the STL.
-
 ## Case hardware and materials
 
 | Item | Specification |
@@ -129,8 +130,28 @@ Open a job in Bambu Studio and match its printer, nozzle, material and plate to 
 | PCB mounting holes | Eight 2.2 mm clearance holes through the 1.6 mm PCB |
 | Cap retention | Rubber bands, routed through the cap anchors and under the keyboard/base |
 
-The 5 mm screw length is measured beneath the head. After passing through the 1.6 mm PCB, approximately 3.4 mm enters the base. Seat each 3 mm insert flush at the PCB seating surface, with clearance below the screw tip. The insert's 3.2 mm outside diameter is not the printed installation-hole size; use the coupon to establish that fit for your inserts, filament and printer.
+<img src="../images/case-bases-with-inserts.jpg" alt="Two pink case bases with brass heat-set inserts already installed" width="360">
 
-The cap uses ordinary rubber bands rather than a dedicated strap. Route them so they capture the keyboard/base and pull into a hook recess behind its tip. Assortment sizes vary; choose a band that remains seated with snug tension rather than excessive stretch.
+Brass heat-set inserts installed in two example bases.
 
-Seat the PCB in the component recesses, fit the inserts and M2 × 5 mm screws, and keep the USB opening and key travel clear. Follow the [build guide](../build-guide.md) for assembly and cap retention.
+An M2 × 5 mm screw extends approximately 3.4 mm past the 1.6 mm PCB. The 3 mm inserts seat flush at the PCB mounting surfaces, with clearance beneath the screw tips. Use the coupon to choose the installation-hole size for the 3.2 mm-OD inserts.
+
+Ordinary rubber bands retain the cap through its loops and hooks, passing under the base. See the [build guide](../build-guide.md#6-fit-the-travel-cap) for the band routing.
+
+## Earlier enclosure reference
+
+These photographs and the fit demonstration show an earlier green enclosure. Use the [current travel cap files](#current-travel-cap) when printing the cover.
+
+<img src="../images/pcb-case-side-fit.jpg" alt="Side view of PCB seating in an earlier green base with its print brim attached" width="320">
+
+Side-profile PCB fit in an earlier print, with its brim still attached.
+
+<img src="../images/earlier-enclosure-parts.jpg" alt="Earlier green cover and base beside the bare PCB" width="360">
+
+Earlier cover, base and PCB shown separately.
+
+<a href="../images/videos/earlier-cover-fit.mp4">
+  <img src="../images/earlier-cover-fit-poster.jpg" alt="Earlier cover fitted over the keyboard base" width="640">
+</a>
+
+[See how the earlier cover fits](../images/videos/earlier-cover-fit.mp4).

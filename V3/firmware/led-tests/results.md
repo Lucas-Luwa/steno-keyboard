@@ -1,6 +1,6 @@
 # Physical LED test results
 
-Date: October 25, 2026. Hardware: Steno V3 with Waveshare RP2040-Plus 16 MB, GP22/buffer/330 Ω data path and eight WS2812B LEDs. Firmware: MicroPython 1.29.0. Results are for the assembled prototype, not a production qualification.
+Date: October 25, 2026. Hardware: Steno V3 with Waveshare RP2040-Plus 16 MB, GP22/buffer/330 Ω data path and eight WS2812B LEDs. Firmware: MicroPython 1.29.0.
 
 | Session | Requested level | Result |
 | --- | --- | --- |
@@ -14,8 +14,6 @@ The base showcase's limiter reduced 57 frames, all in the lavender brightness sw
 
 The builder reported that 50% and 100% appeared similar. The software records confirm different level overrides, 128 versus 255; actual luminance was not measured. Raw PWM settings are not proportional to perceived brightness.
 
-The later 134/35-cue sessions establish successful controller execution and LED-off writes. They were not an independent camera inspection of every rendered frame. The initial RGB/chase visual confirmation demonstrates a functional power/data chain through all eight LEDs at that test level. It does not individually certify every capacitor, measure the buffer waveform, prove a fuse trip characteristic or establish every USB port's current capacity.
+The RGB/chase run visually confirmed all eight LEDs. The later sessions record controller execution and LED-off writes; individual animation frames were not independently inspected.
 
-The controller successfully compiled and ran both renderers. An unsupported string-title method found during the first attempt was removed before the successful showcase. Simulated frame, mapping, interruption/error cleanup and fake-serial checks were also completed before live use. Raw session logs and development checks are retained outside the repository.
-
-No real-audio/FFT or Javelin lighting implementation was tested. Javelin replaces MicroPython, so these demos need a separate port or script implementation there. The saved diagnostic programs remain available for reuse.
+These results cover the MicroPython diagnostics. The [Javelin lighting script](../javelin/README.md#onboard-lighting) is a separate implementation.

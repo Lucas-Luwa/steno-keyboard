@@ -68,25 +68,25 @@ Use the IDs with `run.py --pattern ID`; add `--energy` for extension cues.
 | motion | `chase-fast` | Fast single-dot chase | 7 |
 | motion | `chase-slow` | Slow single-dot chase | 7 |
 | motion | `fill-drain` | Fill then drain the row | 8 |
-| motion | `color-wipe` | Colour wipe across all eight | 8 |
+| motion | `color-wipe` | Color wipe across all eight | 8 |
 | motion | `rainbow-conveyor` | Moving saturated rainbow | 8 |
 | motion | `gradient-conveyor` | Moving purple/cyan gradient | 8 |
 | motion | `sine-wave` | Smooth wave of brightness | 8 |
-| motion | `two-waves` | Two overlapping coloured waves | 8 |
+| motion | `two-waves` | Two overlapping colored waves | 8 |
 | motion | `bouncing-particle` | Smooth bouncing point with subpixel blending | 8 |
 | motion | `random-walk` | A dot wanders between neighbours | 8 |
 | motion | `binary` | Slow binary count in magenta | 8 |
-| symmetry | `mirror-out` | Mirrored centre-to-edge dots | 8 |
-| symmetry | `mirror-in` | Mirrored edge-to-centre dots | 8 |
-| symmetry | `mirror-comet` | Mirrored centre-out comet trails | 8 |
-| symmetry | `mirror-fill` | Both halves fill out from the centre | 8 |
+| symmetry | `mirror-out` | Mirrored center-to-edge dots | 8 |
+| symmetry | `mirror-in` | Mirrored edge-to-center dots | 8 |
+| symmetry | `mirror-comet` | Mirrored center-out comet trails | 8 |
+| symmetry | `mirror-fill` | Both halves fill out from the center | 8 |
 | symmetry | `mirror-breathe` | Both halves breathe together | 8 |
 | symmetry | `cross-breathe` | Left and right take turns breathing | 8 |
-| symmetry | `alternate-banks` | Left/right colour alternation | 8 |
+| symmetry | `alternate-banks` | Left/right color alternation | 8 |
 | symmetry | `split-colors` | Purple left / cyan right | 8 |
 | symmetry | `checkerboard` | Alternating individual LEDs | 8 |
 | symmetry | `paired-zones` | Four two-LED zones | 8 |
-| symmetry | `centre-glow` | Centre glows with a soft falloff | 8 |
+| symmetry | `centre-glow` | Center glows with a soft falloff | 8 |
 | symmetry | `edges-glow` | Outer edges glow with a soft falloff | 8 |
 | textures | `breathe-purple` | Slow purple breathing | 10 |
 | textures | `breathe-blue` | Slow blue breathing | 10 |
@@ -96,11 +96,11 @@ Use the IDs with `run.py --pattern ID`; add `--energy` for extension cues.
 | textures | `fire` | Warm flickering embers | 10 |
 | textures | `ocean-shimmer` | Blue/teal shimmer | 10 |
 | textures | `aurora` | Slow purple/green aurora | 10 |
-| textures | `sparkle-sparse` | Sparse coloured sparkles | 10 |
-| textures | `sparkle-dense` | Dense coloured sparkles | 10 |
+| textures | `sparkle-sparse` | Sparse colored sparkles | 10 |
+| textures | `sparkle-dense` | Dense colored sparkles | 10 |
 | textures | `twinkle` | Soft independent twinkles | 10 |
 | textures | `raindrops` | Drops appear and fade away | 10 |
-| textures | `random-colors` | Random saturated colour per LED | 10 |
+| textures | `random-colors` | Random saturated color per LED | 10 |
 | textures | `noise-flow` | Flowing multicolour texture | 10 |
 | beats | `beat-pulse-60` | Synthetic beat pulse: 60 BPM | 8 |
 | beats | `beat-pulse-90` | Synthetic beat pulse: 90 BPM | 8 |
@@ -108,7 +108,7 @@ Use the IDs with `run.py --pattern ID`; add `--energy` for extension cues.
 | beats | `beat-pulse-150` | Synthetic beat pulse: 150 BPM | 8 |
 | beats | `beat-pulse-180` | Synthetic beat pulse: 180 BPM | 8 |
 | beats | `beat-alternate` | Alternate halves on each beat | 12 |
-| beats | `beat-color` | Choose a saturated colour on each beat | 12 |
+| beats | `beat-color` | Choose a saturated color on each beat | 12 |
 | beats | `beat-step` | Advance one LED per beat | 12 |
 | beats | `beat-mirror` | Launch a mirrored wave on each beat | 12 |
 | beats | `beat-burst` | Random spatial burst on each beat | 12 |
@@ -128,12 +128,12 @@ Use the IDs with `run.py --pattern ID`; add `--energy` for extension cues.
 | detail | `detail-comet` | Four zones versus eight pixels: comet | 12 |
 | detail | `detail-wave` | Four zones versus eight pixels: wave | 12 |
 | detail | `detail-sparkle` | Four zones versus eight pixels: sparkle | 12 |
-| flashes | `flash-1hz` | Labelled magenta flashes: 1 Hz | 5 |
-| flashes | `flash-2hz` | Labelled magenta flashes: 2 Hz | 5 |
-| flashes | `flash-4hz` | Labelled magenta flashes: 4 Hz | 5 |
-| flashes | `flash-8hz` | Labelled magenta flashes: 8 Hz | 5 |
-| flashes | `flash-12hz` | Labelled magenta flashes: 12 Hz | 5 |
-| flashes | `flash-16hz` | Labelled magenta flashes: 16 Hz | 5 |
+| flashes | `flash-1hz` | Labeled magenta flashes: 1 Hz | 5 |
+| flashes | `flash-2hz` | Labeled magenta flashes: 2 Hz | 5 |
+| flashes | `flash-4hz` | Labeled magenta flashes: 4 Hz | 5 |
+| flashes | `flash-8hz` | Labeled magenta flashes: 8 Hz | 5 |
+| flashes | `flash-12hz` | Labeled magenta flashes: 12 Hz | 5 |
+| flashes | `flash-16hz` | Labeled magenta flashes: 16 Hz | 5 |
 | flashes | `flash-alternating` | Alternating banks, four changes/second | 6 |
 | flashes | `flash-double` | Double flash per synthetic beat | 6 |
 | flashes | `flash-triplet` | Three-flash burst per synthetic beat | 6 |

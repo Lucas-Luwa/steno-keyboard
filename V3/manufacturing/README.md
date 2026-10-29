@@ -18,8 +18,8 @@ The ZIP and individual files contain the same V3 board package. It uses two copp
 
 ## Ordering
 
-The prototype PCB was fabricated by **AIVON**. The Gerber package can also be used with another fabricator offering the board specifications below.
+The PCB was fabricated by **AIVON**. The Gerber package can also be used with another fabricator offering the board specifications below.
 
-Upload the ZIP as one PCB design and select bare-board fabrication. Use a two-layer FR-4 stackup, 1.6 mm thickness and 1 oz outer copper. Select the board color, finish and quantity for your build. PCB assembly and stencil services are separate from this package.
+Fabrication specification: **two-layer FR-4, 1.6 mm thickness and 1 oz outer copper**. The package is for bare-board fabrication and includes separate plated and non-plated drill files; stencil layers are not included.
 
-Inspect the fabricator's preview with plated and non-plated holes visible. Use the [electronics guide and BOM](../hardware/README.md) for component selection and the [build guide](../build-guide.md) for hand assembly.
+Component packages are listed in the [electronics guide and BOM](../hardware/README.md); assembly is covered in the [build guide](../build-guide.md).

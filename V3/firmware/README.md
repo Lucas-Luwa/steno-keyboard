@@ -1,10 +1,10 @@
 # Javelin hardware configuration
 
-This directory contains [runnable MicroPython LED diagnostics](led-tests/README.md) and the hardware configuration reference for the separate custom Javelin build. The diagnostics have run on the physical prototype; the custom Javelin build is now installed and its configuration/dictionary lookups have passed on-device checks. The configuration below defines the controller, matrix and RGB connections.
+Steno uses [Javelin/Lapwing](javelin/README.md) for onboard stenography and lighting. This guide covers the controller, switch matrix and RGB connections used by the firmware. The separate [MicroPython diagnostics](led-tests/README.md) check the LED chain before loading Javelin.
 
 ## LED diagnostics
 
-The [LED test guide](led-tests/README.md) covers the initial RGB/chase test, 134-cue colour/brightness showcase and 35-cue fast/fade extension. [Recorded prototype results](led-tests/results.md) distinguish observed execution and visual confirmation from estimated current. Normal connection, execution and stop commands are included; the scripts drive GP22 without scanning the switch matrix.
+The [LED test guide](led-tests/README.md) covers RGB/chase checks, color and brightness patterns, and fade animations. These diagnostics drive GP22 without scanning the switch matrix. See the [test results](led-tests/results.md) for the recorded runs.
 
 ## Controller and pins
 
@@ -37,18 +37,14 @@ Set a brightness cap for normal operation and startup effects. Account for both 
 
 ## Building and flashing
 
-1. Use [javelin-steno-pico](https://github.com/jthlim/javelin-steno-pico) and its [custom-hardware guide](https://github.com/jthlim/javelin-steno-pico#using-javelin-steno-pico-with-your-own-hardware).
-2. Set the controller, matrix scan direction, key actions and RGB parameters above in the hardware configuration.
-3. Prepare the complete dictionary/data image and custom hardware binary, then combine them offline with the matching 31-button script as described in the [reproducible build guide](javelin/README.md). Flash only the combined custom UF2 to this PCB. A hardware-only image does not supply dictionary data or reuse a MicroPython filesystem.
-4. Enter the controller's BOOTSEL mode, connect it over USB and copy the UF2 to the bootloader drive.
-5. Exercise every key, simultaneous chords, releases, USB reconnect and the RGB chain before closing the case.
-
-Use the same key assignments in your firmware configuration and stenography software.
+Use the [custom Javelin build instructions](javelin/README.md#reproduce-the-build) with the matrix, GPIO assignments and LED order above. The packager combines the custom hardware binary, 31-button script and dictionary/data image into one UF2; a hardware-only image does not include the dictionaries.
 
 ## Custom Javelin build
 
-The installed initial setup is Lapwing with the compatible dictionary stack documented in the [Lapwing Javelin guide](https://lapwing.aerick.ca/Appendix-C.html): core Lapwing dictionaries, Emily's Symbols, Javelin-compatible Emily/Abby modifiers, number support and Jeff's Phrasing. Jeff's Modifiers is disabled in that documented setup. The movement and Jeff’s Numbers dictionaries are included but initially disabled; Lapwing’s number dictionary is active. The [custom hardware build and Lapwing preset](javelin/README.md) now include the matrix header, 31-button script, key layout and reproducible image packaging. Offline checks, installation, USB enumeration, configuration and dictionary lookups passed. The first physical word sequence also passed.
+The [Javelin/Lapwing configuration](javelin/README.md) defines the base and Fn key layouts, dictionary preset and onboard lighting. Its guide includes the hardware header, key script and build instructions for this PCB.
 
-The installed [Javelin ambient-lighting script](javelin/README.md#onboard-lighting) provides deliberate Off and 20%/50%/100% brightness controls and five idle patterns: bouncing wave, breathing colors, glowing coals, left-to-right drift and long-rest pulses. Fn + upper-left # + T opens brightness selection at 20%; further taps during its blinks step through 50% and 100%. Confirmation color is pink/cyan/amber for 20/50/100%, on LED 1 for T and the pattern LED for P. S has no lighting action. Fn + upper-left # + P opens the pattern selector at LED 1 (Bouncing wave); further P taps during the five selection blinks step through the five patterns using the first five LEDs as indicators. Fn + # + H turns lighting off immediately; Off is no longer a pattern slot. Letting the blinks finish starts the selected choice; the next opening starts at LED 1 again. Typing uses steady green and returns to the selected idle effect after five minutes without typing. It runs entirely on the board with no PC lighting helper. The earlier MicroPython diagnostics remain separate; their audio events are simulated, and live audio/FFT behavior is not part of the installed script.
+The Lapwing preset includes Emily's Symbols, Javelin-compatible modifiers, number support and Jeff's Phrasing. See the [dictionary preset](javelin/README.md#dictionary-preset) for the enabled dictionaries and settings.
 
-The active [base key layout](javelin/README.md#physical-layout) uses Tab/Enter, duplicate left S, left inner #, right stars, hold-Fn and thumb Backspace. The v1 first-word test and the v2 physical S/Backspace/Fn-Escape checks are recorded separately in the layout guide.
+[Onboard lighting](javelin/README.md#onboard-lighting) includes brightness controls, bouncing wave, breathing colors, glowing coals, color drift and long-rest pulses. Key activity turns the LEDs green; the selected idle effect resumes after five minutes without typing. The lighting guide explains the selectors and color palettes.
+
+The [key layout](javelin/README.md#physical-layout) covers steno keys, navigation, modifiers and lighting controls on the Fn layer.

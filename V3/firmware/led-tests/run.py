@@ -1,4 +1,4 @@
-"""Run labelled LED sections on the known MicroPython controller; never flash.
+"""Run labeled LED sections on the known MicroPython controller; never flash.
 
 Uses the mpremote 1.29 transport to stream output and deliver Ctrl-C
 on request. --list, --prepare-only, --status and --stop do not open a device.
@@ -88,7 +88,7 @@ def main():
     if args.level is not None and not 1 <= args.level <= 255:
         parser.error('--level must be 1..255')
     if args.level is not None and any(c['section'] in ('brightness', 'flashes') for c in chosen):
-        parser.error('Brightness/flash cues use fixed labelled levels; omit --level.')
+        parser.error('Brightness/flash cues use fixed labeled levels; omit --level.')
     if not .25 <= args.speed <= 4 or not 1 <= args.repeat <= 10:
         parser.error('--speed must be .25..4 and --repeat 1..10')
     options = dict(section=section, pattern=args.pattern, level=args.level,

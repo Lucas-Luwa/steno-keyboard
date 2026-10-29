@@ -1,4 +1,4 @@
-"""Read the device catalogue without importing hardware modules or opening USB."""
+"""Read the device catalog without importing hardware modules or opening USB."""
 import ast
 from pathlib import Path
 
