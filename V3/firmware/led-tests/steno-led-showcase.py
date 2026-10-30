@@ -1,4 +1,4 @@
-"""Eight-LED visual showcase for Lucas's steno board; MicroPython on RP2040.
+"""Eight-LED visual showcase for the Steno keyboard; MicroPython on RP2040.
 
 GP22 -> buffer -> 330R -> eight WS2812Bs, physically left to right.
 No matrix pins, HID events, filesystem writes or audio capture.

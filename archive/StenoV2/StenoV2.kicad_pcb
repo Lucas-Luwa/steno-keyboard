@@ -1034,7 +1034,7 @@
 			(uuid "e72073ff-7f4e-4a5a-95ae-a36cb0cfa9bb")
 		)
 		(embedded_fonts no)
-		(model "${KICAD6_3RD_PARTY}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/../../V3/hardware/models/SW_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -1363,7 +1363,7 @@
 			(uuid "569ac4e5-0162-4a4c-a827-068e94949a43")
 		)
 		(embedded_fonts no)
-		(model "${KICAD6_3RD_PARTY}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/../../V3/hardware/models/SW_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -1926,7 +1926,7 @@
 			(uuid "c8b5333f-8762-497f-bb9b-daca97c4bff3")
 		)
 		(embedded_fonts no)
-		(model "${KICAD6_3RD_PARTY}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/../../V3/hardware/models/SW_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -2255,7 +2255,7 @@
 			(uuid "644bfb43-d64a-4881-8f18-3eddf8349c39")
 		)
 		(embedded_fonts no)
-		(model "${KICAD6_3RD_PARTY}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/../../V3/hardware/models/SW_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -2584,7 +2584,7 @@
 			(uuid "44902469-23d7-4233-8ea1-2c012699c6c6")
 		)
 		(embedded_fonts no)
-		(model "${KICAD6_3RD_PARTY}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/../../V3/hardware/models/SW_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -3030,7 +3030,7 @@
 			(uuid "0729974c-150c-4eb3-88bc-086df3b6e779")
 		)
 		(embedded_fonts no)
-		(model "${KICAD6_3RD_PARTY}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/../../V3/hardware/models/SW_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -3359,7 +3359,7 @@
 			(uuid "202fa2e7-fe31-4b14-b094-fedacf107cab")
 		)
 		(embedded_fonts no)
-		(model "${KICAD6_3RD_PARTY}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/../../V3/hardware/models/SW_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -6751,7 +6751,7 @@
 			(uuid "ae39f6be-2888-417b-90ae-e8db34270f67")
 		)
 		(embedded_fonts no)
-		(model "C:/Users/lucas/OneDrive/Desktop/Documents/kiswitch-main/kiswitch-main/library/3dmodels/3d-library.3dshapes/SW_Kailh_Choc_V1.stp"
+		(model "${KIPRJMOD}/../../V3/hardware/models/SW_Kailh_Choc_V1.stp"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -7080,7 +7080,7 @@
 			(uuid "454eaa21-951d-433d-9c36-7707816ed964")
 		)
 		(embedded_fonts no)
-		(model "${KICAD6_3RD_PARTY}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/../../V3/hardware/models/SW_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -7723,7 +7723,7 @@
 			(uuid "7c5c29db-3749-4fe4-9a49-f5314e64756e")
 		)
 		(embedded_fonts no)
-		(model "${KICAD6_3RD_PARTY}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/../../V3/hardware/models/SW_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -8366,7 +8366,7 @@
 			(uuid "4099a2ba-355f-40e2-840f-31676b161183")
 		)
 		(embedded_fonts no)
-		(model "${KICAD6_3RD_PARTY}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/../../V3/hardware/models/SW_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -8695,7 +8695,7 @@
 			(uuid "828f0ad1-d7bf-479b-bb4c-491247deaf2b")
 		)
 		(embedded_fonts no)
-		(model "${KICAD6_3RD_PARTY}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/../../V3/hardware/models/SW_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -9769,7 +9769,7 @@
 			(uuid "4cfb4af5-1048-4859-8cb3-5e2f603f5cf4")
 		)
 		(embedded_fonts no)
-		(model "${KICAD6_3RD_PARTY}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/../../V3/hardware/models/SW_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -10215,7 +10215,7 @@
 			(uuid "78de6a2e-f64d-4543-a976-57c7e213ff67")
 		)
 		(embedded_fonts no)
-		(model "${KICAD6_3RD_PARTY}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/../../V3/hardware/models/SW_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -10544,7 +10544,7 @@
 			(uuid "b77719ae-8463-4af8-8ab3-74907b8a752c")
 		)
 		(embedded_fonts no)
-		(model "${KICAD6_3RD_PARTY}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/../../V3/hardware/models/SW_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -10873,7 +10873,7 @@
 			(uuid "4939c657-e919-4372-9691-2054b2273047")
 		)
 		(embedded_fonts no)
-		(model "${KICAD6_3RD_PARTY}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/../../V3/hardware/models/SW_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -11202,7 +11202,7 @@
 			(uuid "0fb3b8b9-6610-4904-9b5a-e481b0999c18")
 		)
 		(embedded_fonts no)
-		(model "${KICAD6_3RD_PARTY}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/../../V3/hardware/models/SW_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -11531,7 +11531,7 @@
 			(uuid "b67eac4e-38e1-4608-845a-637d9926392b")
 		)
 		(embedded_fonts no)
-		(model "${KICAD6_3RD_PARTY}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/../../V3/hardware/models/SW_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -11860,7 +11860,7 @@
 			(uuid "a1c877a1-d15f-4e67-af54-657f2301a3d7")
 		)
 		(embedded_fonts no)
-		(model "${KICAD6_3RD_PARTY}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/../../V3/hardware/models/SW_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -12189,7 +12189,7 @@
 			(uuid "2e40bc42-e2c9-4c71-b606-0efaaa9c8bba")
 		)
 		(embedded_fonts no)
-		(model "${KICAD6_3RD_PARTY}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/../../V3/hardware/models/SW_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -12518,7 +12518,7 @@
 			(uuid "2cd73992-5a4e-4b27-b590-ff639be36bf1")
 		)
 		(embedded_fonts no)
-		(model "${KICAD6_3RD_PARTY}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/../../V3/hardware/models/SW_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -12964,7 +12964,7 @@
 			(uuid "2880fce1-d2d3-42ea-ac69-0b6aea97e01c")
 		)
 		(embedded_fonts no)
-		(model "${KICAD6_3RD_PARTY}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/../../V3/hardware/models/SW_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -13293,7 +13293,7 @@
 			(uuid "293ecc03-9dee-4e9f-bfd1-e911295ca69a")
 		)
 		(embedded_fonts no)
-		(model "${KICAD6_3RD_PARTY}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/../../V3/hardware/models/SW_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -14681,7 +14681,7 @@
 			(uuid "38c26465-c186-463d-a784-4d30542c4e5f")
 		)
 		(embedded_fonts no)
-		(model "${KICAD6_3RD_PARTY}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/../../V3/hardware/models/SW_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -15010,7 +15010,7 @@
 			(uuid "4648f519-e0ac-4cc0-8bb3-eda090d34d9e")
 		)
 		(embedded_fonts no)
-		(model "${KICAD6_3RD_PARTY}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/../../V3/hardware/models/SW_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -15339,7 +15339,7 @@
 			(uuid "3278890f-96d8-4258-ac07-0faabe0ad317")
 		)
 		(embedded_fonts no)
-		(model "${KICAD6_3RD_PARTY}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/../../V3/hardware/models/SW_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -15668,7 +15668,7 @@
 			(uuid "b99e5c7f-6d77-46cc-bdca-4bff184147a6")
 		)
 		(embedded_fonts no)
-		(model "C:/Users/lucas/OneDrive/Desktop/Documents/kiswitch-main/kiswitch-main/library/3dmodels/3d-library.3dshapes/SW_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/../../V3/hardware/models/SW_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -15997,7 +15997,7 @@
 			(uuid "2afbe90c-3450-4ed5-81c5-db292331f303")
 		)
 		(embedded_fonts no)
-		(model "${KICAD6_3RD_PARTY}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/../../V3/hardware/models/SW_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -16326,7 +16326,7 @@
 			(uuid "b3670156-4d03-4c0c-96da-7bb1efcb91e4")
 		)
 		(embedded_fonts no)
-		(model "${KICAD6_3RD_PARTY}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/../../V3/hardware/models/SW_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -16655,7 +16655,7 @@
 			(uuid "35f699fe-6890-47c9-925b-e2428be42eb4")
 		)
 		(embedded_fonts no)
-		(model "${KICAD6_3RD_PARTY}/3dmodels/com_github_perigoso_keyswitch-kicad-library/3d-library.3dshapes/SW_Kailh_Choc_V1.wrl"
+		(model "${KIPRJMOD}/../../V3/hardware/models/SW_Kailh_Choc_V1.wrl"
 			(offset
 				(xyz 0 0 0)
 			)

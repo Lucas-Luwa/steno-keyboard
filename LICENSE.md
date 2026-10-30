@@ -1,6 +1,6 @@
 # Steno project licensing
 
-Copyright © 2026 Lucas and Steno contributors for original project contributions.
+Copyright © 2026 Steno project.
 
 ## Build, modify and share
 
@@ -14,8 +14,6 @@ You are welcome to build your own Steno keyboard, study the designs, make change
 | Original guide text, photographs and explanatory illustrations | [CC BY 4.0](LICENSES/CC-BY-4.0.txt) |
 
 These are permissive grants: the covered original work may be reused, modified and distributed, including commercially, under the applicable terms. Preserve the applicable copyright, attribution and license notices. Hardware modifications distributed under CERN-OHL-P must also identify their changes as that license requires. You do not have to publish your own improvements under these permissive licenses.
-
-Retain the supplied notices and license references as required by the applicable license, including its requirements for indicating modifications. A suggested credit is **Lucas and the Steno contributors**, with a link to the source repository when sharing online. Attribution does not imply endorsement; this suggested wording adds no conditions to the license texts.
 
 ## Third-party exceptions
 

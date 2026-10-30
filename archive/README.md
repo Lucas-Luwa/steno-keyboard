@@ -7,6 +7,8 @@ Use [V3](../V3/) and the [main project guide](../README.md) for the current keyb
 - [`StenoV1/`](StenoV1/): first electronics version.
 - [`StenoV2/`](StenoV2/): second electronics version and its fabrication files.
 
+The projects share the [Kailh Choc footprint](libraries/Switch_Keyboard_Kailh.pretty/) and use the [bundled switch models](../V3/hardware/models/).
+
 ## Earlier base meshes
 
 The [`prints/`](prints/) directory contains these earlier case-base exports:
