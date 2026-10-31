@@ -101,7 +101,7 @@ Use the IDs with `run.py --pattern ID`; add `--energy` for extension cues.
 | textures | `twinkle` | Soft independent twinkles | 10 |
 | textures | `raindrops` | Drops appear and fade away | 10 |
 | textures | `random-colors` | Random saturated color per LED | 10 |
-| textures | `noise-flow` | Flowing multicolour texture | 10 |
+| textures | `noise-flow` | Flowing multicolor texture | 10 |
 | beats | `beat-pulse-60` | Synthetic beat pulse: 60 BPM | 8 |
 | beats | `beat-pulse-90` | Synthetic beat pulse: 90 BPM | 8 |
 | beats | `beat-pulse-120` | Synthetic beat pulse: 120 BPM | 8 |

@@ -1,4 +1,4 @@
-# Build Steno V3
+# V3 build guide
 
 This guide covers parts, case printing, soldering, firmware configuration and final assembly.
 
@@ -29,7 +29,7 @@ For CAD changes, use the [SolidWorks files](mechanical/README.md#editable-solidw
 
 ## 3. Assemble the electronics
 
-![Two Steno PCBs on the bench at different assembly stages](images/pcb-assembly-progress.jpg)
+![Two keyboard PCBs on the bench at different assembly stages](images/pcb-assembly-progress.jpg)
 
 PCB population at two assembly stages.
 
@@ -37,7 +37,7 @@ PCB population at two assembly stages.
 2. Fit the Waveshare controller with its USB-C connector aligned to the case opening, then solder the castellated pads.
 3. Fit and solder the Choc switches, then install the keycaps.
 
-![Steno board with controller and RGB LEDs installed, before switches](images/pcb-controller-and-leds.jpg)
+![Keyboard PCB with controller and RGB LEDs installed, before switches](images/pcb-controller-and-leds.jpg)
 
 Controller and LEDs installed before fitting the switches.
 
@@ -69,9 +69,9 @@ For onboard stenography, use the [Javelin build instructions](firmware/javelin/R
 
 Seat the M2 inserts flush at the PCB mounting surfaces. Mount the PCB with eight M2 × 5 mm screws, keeping the underside components clear of the base recesses and the screw tips clear of the blind-hole floors.
 
-![Completed aqua-keycap keyboard in a green printed base](images/keyboard-green-base.jpg)
+![Completed keyboard](images/keyboard-completed.jpg)
 
-Completed green-base build. The [front-page photo](../README.md) shows the pink-base color option.
+Completed keyboard with the PCB mounted in the case.
 
 ## 6. Fit the travel cap
 

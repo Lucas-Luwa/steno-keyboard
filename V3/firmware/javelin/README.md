@@ -1,6 +1,6 @@
-# Steno V3 Javelin / Lapwing
+# V3 Javelin firmware and Lapwing dictionaries
 
-Steno uses embedded Javelin with the Lapwing dictionary preset on a Waveshare RP2040-Plus **16 MB** controller. The [key script](steno_v3.jss) defines the base and Fn layouts and the onboard lighting.
+The keyboard runs Javelin firmware with the Lapwing dictionary preset on a Waveshare RP2040-Plus **16 MB** controller. The [key script](steno_v3.jss) defines the base and Fn layouts and the onboard lighting.
 
 The script compiles to JSS4 bytecode and runs inside Javelin. Animations use the board's timers and PIO/DMA LED driver.
 
@@ -80,13 +80,9 @@ All frames, including per-LED patterns, share a conservative **320 mA estimated 
 
 ### Lighting demonstration
 
-<a href="../../images/videos/lighting-idle-and-key-activity.mp4">
-  <img src="../../images/lighting-idle-and-key-activity-poster.jpg" alt="Warm idle lighting on the green-base keyboard" width="640">
-</a>
+https://github.com/user-attachments/assets/99f4c5f5-5109-4170-b5e4-af9b0f2e8aee
 
-[Watch the lighting respond to key presses](../../images/videos/lighting-idle-and-key-activity.mp4).
-
-Warm idle lighting followed by the green response to key activity on the green-base build. The [front-page demonstration](../../../README.md#onboard-lighting) shows lighting on the pink-base build.
+Warm idle lighting and the green key-activity response.
 
 ## Configuration and previous versions
 

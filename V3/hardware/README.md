@@ -2,7 +2,7 @@
 
 Open [`StenoV3.kicad_pro`](StenoV3.kicad_pro) in KiCad 10 with the standard symbol, footprint and 3D libraries installed.
 
-![Unpopulated Steno PCB seated in a green printed base](../images/pcb-unpopulated.jpg)
+![Unpopulated keyboard PCB seated in the printed base](../images/pcb-unpopulated.jpg)
 
 Bare PCB before component installation. Follow the [illustrated build guide](../build-guide.md#3-assemble-the-electronics) for the populated board and switch stages.
 
@@ -78,7 +78,7 @@ The RGB chain is **LED17 → LED16 → LED15 → LED14 → LED13 → LED12 → L
 
 ## Board views
 
-![Steno PCB front layout render](../images/pcb-front.png)
+![Keyboard PCB front layout render](../images/pcb-front.png)
 
 Use the [front layout](../images/pcb-front.svg), [back layout](../images/pcb-back.svg) and [schematic](../images/schematic.svg) to identify pads and component orientations.
 

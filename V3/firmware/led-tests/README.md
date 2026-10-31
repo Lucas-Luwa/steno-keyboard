@@ -6,17 +6,13 @@ See the [test results](results.md) for recorded RGB, brightness and animation ru
 
 ## Board demonstration
 
-![Controller and eight blue RGB LEDs operating on the board before switches are installed](../../images/pcb-led-test.jpg)
+![Controller and eight RGB LEDs operating on the board before switches are installed](../../images/pcb-led-test.jpg)
 
 The controller and RGB chain can be checked before installing switches.
 
-<a href="../../images/videos/led-diagnostic-chase.mp4">
-  <img src="../../images/led-diagnostic-chase-poster.jpg" alt="LED diagnostic running on the bare board" width="640">
-</a>
+https://github.com/user-attachments/assets/39385478-dcb2-4bba-a9ec-e549e90830cb
 
-[Watch the LED test](../../images/videos/led-diagnostic-chase.mp4).
-
-For the assembled keyboard's idle effects, see [onboard lighting](../javelin/README.md#onboard-lighting).
+RGB chase test on the board before switch installation.
 
 ## Hardware and LED order
 

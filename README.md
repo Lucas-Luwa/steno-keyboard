@@ -1,10 +1,10 @@
-# Steno
+# Stenography keyboard
 
 A custom 30-key stenography keyboard with a Waveshare RP2040-Plus 16 MB controller, Kailh Choc V1 switches, eight RGB LEDs, and a 3D-printed case with a removable travel cap.
 
 **[V3](V3/) is the latest version.** Earlier electronics designs and case exports are in [archive/](archive/README.md).
 
-![Assembled Steno keyboard with aqua keycaps and a pink printed base](V3/images/keyboard-assembled.jpg)
+![Assembled stenography keyboard](V3/images/keyboard-assembled.jpg)
 
 ## Start here
 
@@ -20,15 +20,11 @@ A custom 30-key stenography keyboard with a Waveshare RP2040-Plus 16 MB controll
 
 ## Onboard lighting
 
-Steno uses [Javelin/Lapwing](V3/firmware/javelin/README.md) for onboard stenography. The lighting runs on the controller, with selectable idle patterns, brightness controls and a green typing indicator.
+The keyboard uses [Javelin firmware with Lapwing dictionaries](V3/firmware/javelin/README.md) for onboard stenography. The lighting runs on the controller, with selectable idle patterns, brightness controls and a green typing indicator.
 
-<a href="V3/images/videos/onboard-lighting-demo.mp4">
-  <img src="V3/images/onboard-lighting-demo-poster.jpg" alt="Onboard lighting on the assembled keyboard" width="320">
-</a>
+https://github.com/user-attachments/assets/ecf25d7d-600b-45e7-80ae-683e2c61e2ce
 
-[Watch the lighting demo](V3/images/videos/onboard-lighting-demo.mp4).
-
-See the [lighting controls and color palettes](V3/firmware/javelin/README.md#onboard-lighting), or the separate [bare-board LED diagnostics](V3/firmware/led-tests/README.md).
+Onboard lighting patterns and controls.
 
 ## Design files
 

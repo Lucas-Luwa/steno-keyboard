@@ -1,6 +1,6 @@
 # Physical LED test results
 
-Date: October 25, 2026. Hardware: Steno V3 with Waveshare RP2040-Plus 16 MB, GP22/buffer/330 Ω data path and eight WS2812B LEDs. Firmware: MicroPython 1.29.0.
+Date: October 25, 2026. Hardware: V3 keyboard with Waveshare RP2040-Plus 16 MB, GP22/buffer/330 Ω data path and eight WS2812B LEDs. Firmware: MicroPython 1.29.0.
 
 | Session | Requested level | Result |
 | --- | --- | --- |

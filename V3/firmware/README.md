@@ -1,6 +1,6 @@
 # Javelin hardware configuration
 
-Steno uses [Javelin/Lapwing](javelin/README.md) for onboard stenography and lighting. This guide covers the controller, switch matrix and RGB connections used by the firmware. The separate [MicroPython diagnostics](led-tests/README.md) check the LED chain before loading Javelin.
+The keyboard uses [Javelin firmware with Lapwing dictionaries](javelin/README.md) and onboard lighting. This guide covers the controller, switch matrix and RGB connections used by the firmware. The separate [MicroPython diagnostics](led-tests/README.md) check the LED chain before loading Javelin.
 
 ## LED diagnostics
 

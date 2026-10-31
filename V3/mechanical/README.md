@@ -2,7 +2,7 @@
 
 The case base and travel cap are supplied as editable CAD and printable models. This folder also includes an insert-fit coupon, LED alignment jig references, keycap references and keyboard assemblies.
 
-<img src="../images/case-and-cover-parts.jpg" alt="Pink-faced travel cover and two separate example pink case bases" width="640">
+<img src="../images/case-and-cover-parts.jpg" alt="Travel cover and two example case bases" width="640">
 
 Travel cover with two example case bases.
 
@@ -99,7 +99,7 @@ The base was printed in PLA on a **Sovol SV06** using the following OrcaSlicer s
 
 Rotate the base and cap **approximately 45° in the XY plane** to fit the bed. Their rotated footprints are approximately **204 × 204 mm** and **206.5 × 206.5 mm**; with a 5 mm outer brim, these become about **214 × 214 mm** and **216.5 × 216.5 mm**.
 
-<img src="../images/case-printing-sv06.jpg" alt="Green case base printing diagonally on the Sovol SV06 bed" width="360">
+<img src="../images/case-printing-sv06.jpg" alt="Case base printing diagonally on the Sovol SV06 bed" width="360">
 
 The base printing diagonally on the Sovol SV06.
 
@@ -130,7 +130,7 @@ These `.gcode.3mf` files use the named printer's **Bambu PLA Basic** profile wit
 | PCB mounting holes | Eight 2.2 mm clearance holes through the 1.6 mm PCB |
 | Cap retention | Rubber bands, routed through the cap anchors and under the keyboard/base |
 
-<img src="../images/case-bases-with-inserts.jpg" alt="Two pink case bases with brass heat-set inserts already installed" width="360">
+<img src="../images/case-bases-with-inserts.jpg" alt="Two case bases with brass heat-set inserts installed" width="360">
 
 Brass heat-set inserts installed in two example bases.
 
@@ -140,18 +140,16 @@ Ordinary rubber bands retain the cap through its loops and hooks, passing under 
 
 ## Earlier enclosure reference
 
-These photographs and the fit demonstration show an earlier green enclosure. Use the [current travel cap files](#current-travel-cap) when printing the cover.
+These photographs and the fit demonstration show an earlier enclosure. Use the [current travel cap files](#current-travel-cap) when printing the cover.
 
-<img src="../images/pcb-case-side-fit.jpg" alt="Side view of PCB seating in an earlier green base with its print brim attached" width="320">
+<img src="../images/pcb-case-side-fit.jpg" alt="Side view of PCB seating in an earlier base with its print brim attached" width="320">
 
 Side-profile PCB fit in an earlier print, with its brim still attached.
 
-<img src="../images/earlier-enclosure-parts.jpg" alt="Earlier green cover and base beside the bare PCB" width="360">
+<img src="../images/earlier-enclosure-parts.jpg" alt="Earlier cover and base beside the bare PCB" width="360">
 
 Earlier cover, base and PCB shown separately.
 
-<a href="../images/videos/earlier-cover-fit.mp4">
-  <img src="../images/earlier-cover-fit-poster.jpg" alt="Earlier cover fitted over the keyboard base" width="640">
-</a>
+https://github.com/user-attachments/assets/afd2523c-cdcb-4bce-90de-52b5e9e94dbe
 
-[See how the earlier cover fits](../images/videos/earlier-cover-fit.mp4).
+Earlier travel cover fitted over the PCB and base.
