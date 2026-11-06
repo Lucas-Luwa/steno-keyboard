@@ -1,0 +1,239 @@
+--- a/javelin/engine.h
++++ b/javelin/engine.h
+@@ -92,6 +92,10 @@
+ 
+   size_t strokeCount = 0;
+ 
++  // Count firmware-generated character Backspaces until the next stroke/undo.
++  size_t manualBackspaceCount = 0;
++  bool manualUndoBoundary = false;
++
+   // When error messages need to be displayed, activeDictionary is redirected
+   // to an InvalidDictionary.
+   StenoDictionary *activeDictionary;
+@@ -137,7 +141,13 @@
+   struct ConvertTextData;
+ 
+   void ProcessNormalModeUndo();
++  bool ProcessNormalModeUndoStep();
+   void ProcessNormalModeStroke(StenoStroke stroke);
++  void BreakManualUndoHistory();
++  void CommitManualBackspaces();
++  bool ApplyManualBackspaces(StenoKeyCodeBuffer &previous,
++                             const StenoKeyCodeBuffer &next);
++  static bool IsTrackableManualText(const StenoKeyCodeBuffer &buffer);
+ 
+   void InitiateAddTranslationMode(const char *text);
+   void ProcessAddTranslationModeUndo();
+--- a/javelin/engine.cc
++++ b/javelin/engine.cc
+@@ -108,6 +108,20 @@
+                                   ScanCodeAction action) {
+   switch (mode) {
+   case StenoEngineMode::NORMAL:
++    if (action != ScanCodeAction::RELEASE) {
++      const KeyCode key(scanCodeAndModifiers & 0xff);
++      if (!key.IsModifier()) {
++        if (key.value == KeyCode::BACKSPACE &&
++            (scanCodeAndModifiers & MODIFIER_MASK) == 0 &&
++            history.IsNotEmpty() &&
++            manualBackspaceCount < StenoKeyCodeBuffer::BUFFER_SIZE) {
++          ++manualBackspaceCount;
++          manualUndoBoundary = true;
++        } else {
++          BreakManualUndoHistory();
++        }
++      }
++    }
+     return false;
+ 
+   case StenoEngineMode::ADD_TRANSLATION:
+@@ -122,6 +136,7 @@
+ //---------------------------------------------------------------------------
+ 
+ void StenoEngine::ResetState() {
++  manualBackspaceCount = 0;
+   history.Reset();
+   altTranslationHistory.Reset();
+   state.Reset();
+@@ -195,6 +210,7 @@
+ 
+ void StenoEngine::SendText(const uint8_t *p) {
+   const ExternalFlashSentry externalFlashSentry;
++  BreakManualUndoHistory();
+ 
+   const char *ccp = (const char *)p;
+ 
+--- a/javelin/engine_normal_mode.cc
++++ b/javelin/engine_normal_mode.cc
+@@ -53,6 +53,71 @@
+ //---------------------------------------------------------------------------
+ 
+ constexpr size_t MAX_EXTRA_STROKES = 4;
++
++bool StenoEngine::IsTrackableManualText(const StenoKeyCodeBuffer &buffer) {
++  for (size_t i = 0; i < buffer.GetCount(); ++i) {
++    const StenoKeyCode code = buffer.buffer[i];
++    // Control keys, newlines and Unicode can change the caret or have host-
++    // dependent deletion behavior. Restrict character accounting to ASCII text.
++    if (code.IsRawKeyCode() || code.GetUnicode() < 32 ||
++        code.GetUnicode() > 126) {
++      return false;
++    }
++  }
++  return true;
++}
++
++void StenoEngine::BreakManualUndoHistory() {
++  ResetState();
++  manualUndoBoundary = true;
++}
++
++void StenoEngine::CommitManualBackspaces() {
++  if (!manualBackspaceCount) {
++    return;
++  }
++  // Starting a new outline commits the edited text: never reconstruct deleted
++  // letters as part of the next word, suffix or retroactive transformation.
++  const StenoState persistentState = state.GetPersistentState();
++  bool joinNext = true;
++  if (history.IsNotEmpty()) {
++    // Use the same bounded tail as normal translation, rather than rendering
++    // all 256 retained strokes into the fixed-size key-code buffer.
++    const size_t conversionCount =
++        history.GetCount() - GetStartingStrokeForNormalModeProcessing();
++    StenoSegmentList segments(conversionCount);
++    BuildSegmentContext context(segments, *this);
++    CreateSegments(context, history.GetCount(), nextConversionBuffer,
++                   conversionCount, segments);
++    ConvertText(nextConversionBuffer.keyCodeBuffer, segments, 0,
++                nextConversionBuffer.segmentBuilder.GetStartingStrokeId(), false);
++    const StenoKeyCodeBuffer &text = nextConversionBuffer.keyCodeBuffer;
++    if (IsTrackableManualText(text) && manualBackspaceCount < text.GetCount()) {
++      joinNext = text.buffer[text.GetCount()-manualBackspaceCount-1].IsSpace();
++    }
++  }
++  BreakManualUndoHistory();
++  state = persistentState;
++  state.joinNext = joinNext;
++  state.isGlue = false;
++}
++
++bool StenoEngine::ApplyManualBackspaces(StenoKeyCodeBuffer &previous,
++                                       const StenoKeyCodeBuffer &next) {
++  if (!manualBackspaceCount) {
++    return true;
++  }
++  if (manualBackspaceCount > previous.GetCount() ||
++      !IsTrackableManualText(previous) || !IsTrackableManualText(next)) {
++    // Manual editing crossed the reconstructable tail. Keep the visible edit
++    // and stop undo at this boundary instead of deleting older characters.
++    BreakManualUndoHistory();
++    return false;
++  }
++  previous.currentOutput -= manualBackspaceCount;
++  manualBackspaceCount = 0;
++  return true;
++}
+ 
+ size_t StenoEngine::GetStartingStrokeForNormalModeProcessing() const {
+   const size_t maximumConversionStrokes =
+@@ -144,6 +209,7 @@
+ }
+ 
+ void StenoEngine::ProcessNormalModeStroke(StenoStroke stroke) {
++  CommitManualBackspaces();
+ #if ENABLE_DICTIONARY_STATS
+   StenoDictionary::ResetStats();
+ #endif
+@@ -345,6 +411,10 @@
+                      nextConversionBuffer.segmentBuilder.GetStartingStrokeId());
+   }
+ 
++  if (!IsTrackableManualText(nextConversionBuffer.keyCodeBuffer)) {
++    BreakManualUndoHistory();
++  }
++
+ #if ENABLE_PROFILE
+   const uint32_t t7 = sysTick->ReadCycleCount();
+ #endif
+@@ -373,15 +443,25 @@
+ }
+ 
+ void StenoEngine::ProcessNormalModeUndo() {
++  // Each skipped step removes history, so this loop is bounded by its size.
++  // Use iteration rather than recursion when a held Backspace erased many
++  // complete strokes before reaching the currently visible fragment.
++  while (ProcessNormalModeUndoStep()) {
++  }
++}
++
++bool StenoEngine::ProcessNormalModeUndoStep() {
+ #if ENABLE_PROFILE
+   const uint32_t t0 = sysTick->ReadCycleCount();
+ #endif
+ 
+   const size_t undoCount = history.GetUndoCount();
+   if (undoCount == 0) {
+-    Key::Tap(KeyCode::BACKSPACE);
++    if (!manualUndoBoundary) {
++      Key::Tap(KeyCode::BACKSPACE);
++    }
+     PrintPaperTapeUndo(0);
+-    return;
++    return false;
+   }
+ 
+   const size_t startingStroke =
+@@ -519,6 +599,32 @@
+   DumpKeyCodeBufferElements();
+ #endif
+ 
++  const StenoKeyCodeBuffer &previous = previousConversionBuffer.keyCodeBuffer;
++  const StenoKeyCodeBuffer &next = nextConversionBuffer.keyCodeBuffer;
++  if (manualBackspaceCount && next.GetCount() == 0 &&
++      manualBackspaceCount >= previous.GetCount() &&
++      IsTrackableManualText(previous)) {
++    // All output from this undo step has already been manually erased. Consume
++    // that deletion count without sending keys, then undo the preceding step.
++    // For "red cat e" with three deletes, skip the erased " e" and carry the
++    // remaining one-character deletion into undoing " cat".
++    // A nonempty replacement (e.g. python -> pie) still uses the normal diff;
++    // do not skip a transformation that reconstructs an earlier translation.
++    manualBackspaceCount -= previous.GetCount();
++    PrintPaperTapeUndo(undoCount);
++    if (history.IsNotEmpty()) {
++      return true;
++    }
++    // Never synthesize a fallback Backspace beyond retained history.
++    manualBackspaceCount = 0;
++    return false;
++  }
++
++  if (!ApplyManualBackspaces(previousConversionBuffer.keyCodeBuffer,
++                            nextConversionBuffer.keyCodeBuffer)) {
++    PrintPaperTapeUndo(0);
++    return false;
++  }
+   emitter.Process(previousConversionBuffer.keyCodeBuffer,
+                   nextConversionBuffer.keyCodeBuffer);
+ 
+@@ -537,6 +643,7 @@
+   Console::Printf("Text Conversion: %u\n", t4 - t3);
+   Console::Printf("Text Emitter: %u\n\n", t5 - t4);
+ #endif
++  return false;
+ }
+ 
+ void StenoEngine::CreateSegments(BuildSegmentContext &context,
+--- a/pico_bindings.cc
++++ b/pico_bindings.cc
+@@ -237,7 +237,7 @@
+   ButtonScriptManager::ExecuteScript(ButtonScriptId::STENO_MODE_UPDATE);
+ }
+ 
+-#include "../javelin-steno/arm/systick.h"
++#include "javelin/arm/systick.h"
+ void Time_Binding(void *context, const char *commandLine) {
+   const char *p = strchr(commandLine, ' ');
+   if (p == nullptr) {

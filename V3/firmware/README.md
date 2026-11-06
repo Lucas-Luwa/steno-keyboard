@@ -48,3 +48,5 @@ The Lapwing preset includes Emily's Symbols, Javelin-compatible modifiers, numbe
 [Onboard lighting](javelin/README.md#onboard-lighting) includes brightness controls, bouncing wave, breathing colors, glowing coals, color drift and long-rest pulses. Key activity turns the LEDs green; the selected idle effect resumes after five minutes without typing. The lighting guide explains the selectors and color palettes.
 
 The [key layout](javelin/README.md#physical-layout) covers steno keys, navigation, modifiers and lighting controls on the Fn layer.
+
+[Backspace-aware undo](javelin/README.md#backspace-aware-undo) accounts for character deletions before steno undo. The firmware guide includes the matching prebuilt UF2, editable key script and C++ source patch.

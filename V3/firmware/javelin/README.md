@@ -2,7 +2,7 @@
 
 The keyboard runs Javelin firmware with the Lapwing dictionary preset on a Waveshare RP2040-Plus **16 MB** controller. The [key script](steno_v3.jss) defines the base and Fn layouts and the onboard lighting.
 
-The script compiles to JSS4 bytecode and runs inside Javelin. Animations use the board's timers and PIO/DMA LED driver.
+The script compiles to JSS4 bytecode and runs inside Javelin. Animations use the board's timers and PIO/DMA LED driver. The matching C++ engine includes Backspace-aware steno undo; its changes are supplied as a [source patch](patches/backspace-aware-undo.patch).
 
 ## Physical layout
 
@@ -25,6 +25,26 @@ Ent Ctrl Shft Alt Win   --      -- Left Down Right -- --
 ```
 
 `Brt*`, `Pat*` and `Off*` require the upper-left # guard as well as Fn; those keys produce no output by themselves on Fn. Fn + Tab, the upper far-left key, remains Escape. Every other key retains its press-time action and releases that same action even if Fn is released first. Release a steno chord before switching layers.
+
+## Backspace-aware undo
+
+The dedicated Bsp key deletes one character per tap. Holding it produces counted firmware taps after a 400 ms delay, then one every 50 ms. Release Bsp before pressing `*`.
+
+`*` undoes steno strokes. After character deletion, it accounts for text already removed. When the output of a recent undo step is entirely erased, it skips that step and continues to the first surviving fragment:
+
+| Action | Text |
+|---|---|
+| Stroke `RED / KAT / E` | `red cat e` |
+| Tap Bsp three times | `red ca` |
+| Stroke `*` | `red` |
+
+Multistroke undo can restore an earlier translation. For example, `START / -G` produces `starting`; two Backspaces leave `starti`, and `*` restores `start`.
+
+The engine retains up to 256 recent strokes in RAM and discards the oldest outlines as the buffer fills. Restarting clears history; waiting does not. Navigation, modified deletion, raw-key output, Unicode or control output establish an undo boundary. Writing a new steno stroke after Backspace commits the edited text and starts fresh history; undo cannot cross back into the committed edit. Ambiguous transformations and deletion beyond reconstructable history stop at a boundary instead of guessing.
+
+Character accounting covers printable ASCII at the end of text in an ordinary editor. Mouse edits, other keyboards, application autocorrection and external caret or focus changes are invisible to the onboard engine.
+
+The feature needs both the patched C++ engine and the matching [key script](steno_v3.jss). A script-only update on the older engine does not implement it.
 
 ## Onboard lighting
 
@@ -90,7 +110,7 @@ Warm idle lighting and the green key-activity response.
 
 The [previous magenta v2 script](previous/steno_v3-layout-v2.jss) is available for rollback with the same S1 mapping. The [v1 script](previous/steno_v3-layout-v1.jss) requires restoring S1 to stroke bit 0 (#); replacing that script alone is insufficient. Earlier v1/v2 UF2 files do not include ambient lighting.
 
-For a keyboard already running this custom hardware build, update only the compiled 31-button script and matching stored source through Javelin's supported script/flash tools. Back up the current script first and retain dictionary/configuration data. A full combined UF2 build below is for reproducing the entire installation; export any user dictionary before replacing full firmware/data.
+Use the [complete matching UF2](prebuilt/steno-v3-backspace-aware.uf2) to install Backspace-aware undo on an older custom build. Export any personal user dictionary before replacing full firmware/data. Once the patched engine is installed, later lighting-only changes can use Javelin's supported script/flash tools to replace the compiled 31-button script and its matching stored source while retaining dictionary/configuration data.
 
 ## Dictionary preset
 
@@ -115,7 +135,7 @@ The supplied preset uses the US Windows Alt host layout, default keyboard protoc
 
 ## Reproduce the build
 
-Build dependencies and generated binaries are not bundled. Upstream license terms are listed in [LICENSE.md](../../../LICENSE.md#third-party-exceptions).
+Build dependencies are downloaded separately. Matching binaries are supplied in [prebuilt/](prebuilt/). Upstream license terms are listed in [LICENSE.md](../../../LICENSE.md#third-party-exceptions); the source patch retains the terms applicable to its Javelin-derived portions.
 
 | Component | Tested revision/version |
 |---|---|
@@ -128,7 +148,13 @@ Build dependencies and generated binaries are not bundled. Upstream license term
 | CMake / Ninja | 4.4.4 / 1.13.2 |
 | Dart SDK | 3.13.7 |
 
-1. Clone those revisions, initialize the SDK's TinyUSB submodule, and link or copy the engine into `javelin-steno-pico/javelin` as upstream describes. Copy `steno_v3.h` into `javelin-steno-pico/config/`.
+1. Clone those revisions, initialize the SDK's TinyUSB submodule, and copy the engine into the ordinary directory `javelin-steno-pico/javelin`. Copy `steno_v3.h` into `javelin-steno-pico/config/`. From the Pico bindings checkout, apply the [Backspace-aware undo patch](patches/backspace-aware-undo.patch), replacing the example path with the path to this repository:
+
+   ```powershell
+   git apply path/to/steno/V3/firmware/javelin/patches/backspace-aware-undo.patch
+   ```
+
+   The patch changes `javelin/engine.h`, `javelin/engine.cc`, `javelin/engine_normal_mode.cc` and the engine-header include in `pico_bindings.cc`. Apply it before building; keep the engine directory inside the Pico bindings source tree.
 2. Set `PICO_SDK_PATH` and `PICO_TOOLCHAIN_PATH` for the shell, with the compiler and Ninja on PATH. From the Pico bindings checkout:
 
    ```powershell
@@ -149,7 +175,7 @@ Build dependencies and generated binaries are not bundled. Upstream license term
 5. From this directory, combine the downloaded data with the custom hardware and 31-button script:
 
    ```powershell
-   python package.py --builder path/to/downloaded.uf2 --hardware path/to/javelin-steno-pico.bin --script steno_v3-script.bin --source steno_v3.jss --output steno-v3-javelin-layout-v2.uf2 --top-s-as-s
+   python package.py --builder path/to/downloaded.uf2 --hardware path/to/javelin-steno-pico.bin --script steno_v3-script.bin --source steno_v3.jss --output steno-v3-backspace-aware.uf2 --top-s-as-s
    ```
 
    The packager combines the custom hardware and script with the builder's system, word list, host layouts and dictionaries, and writes a SHA-256 sidecar. The image fits the 16 MB flash; Javelin initializes the final 256 KB user-dictionary area on first boot.
@@ -158,8 +184,23 @@ Use the local [first-word typing page](first-words.html) for the initial S, T, H
 
 ## Install and check
 
+The prebuilt files are for the Steno V3 with a Waveshare RP2040-Plus **16 MB**, the documented 31-button matrix and eight LEDs:
+
+| File | Purpose |
+|---|---|
+| [steno-v3-backspace-aware.uf2](prebuilt/steno-v3-backspace-aware.uf2) | Complete matching hardware/engine, script, configuration and dictionary data; use this for flashing |
+| [steno-v3-backspace-aware.sha256](prebuilt/steno-v3-backspace-aware.sha256) | SHA-256 checksum for the combined UF2 |
+| [javelin-steno-pico.bin](prebuilt/javelin-steno-pico.bin) | Patched hardware/engine binary for repackaging |
+| [steno_v3-script.bin](prebuilt/steno_v3-script.bin) | Compiled JSS4 bytecode matching `steno_v3.jss` |
+
+The combined UF2 SHA-256 is `714d67d7520f00645ba7a1fb9259f9bf140c5db281adb7f74421795ba1679f1f`.
+
 Flash **the combined custom UF2** through the RP2040 BOOTSEL drive (`RPI-RP2`). This replaces MicroPython; lighting starts off after restart.
 
 Use the [Javelin web tools](https://lim.au/#/software/javelin-steno) for settings, dictionaries, key state and paper tape. Check the mapped steno and Fn actions against the [physical layout](#physical-layout). A stock Uni firmware update would replace this PCB's custom hardware configuration.
 
 To return to the saved light demos, reinstall the correct Waveshare RP2040-Plus 16 MB MicroPython firmware and use the [LED test launcher](../led-tests/README.md). Returning to Javelin uses the combined custom UF2 again; export any user dictionary before reinitializing firmware/data.
+
+## Validation record
+
+The November 5, 2026 build uses 231,392 bytes for the hardware/engine binary and 88,736 bytes of RAM. Focused engine checks covered partial deletion, deletion across strokes, repeated deletion across a phrase, exhausted-history protection, multistroke restoration and ordinary undo. Package checks verified the UF2 and preserved dictionary/system data. The builder reports that the supplied longer-word, cross-stroke and multistroke manual exercises seem to work on the updated keyboard. Application-specific editing behavior and external caret changes remain subject to the limits above.

@@ -1,4 +1,5 @@
-// Steno V3 layout v6.1: five autonomous idle patterns; original v2 base mapping.
+// Steno V3 layout v7: Backspace-aware undo; v6.1 lighting and base mapping.
+// Requires the matching patched C++ engine. Backspace repeats are counted taps.
 // Fn+# P opens at LED1/Wave; further P taps during confirmation advance.
 // LED1=Wave, LED2=Breathing, LED3=Coals, LED4=Drift, LED5=Long-rest pulses.
 // Off is Fn+# H; internal pattern 0 remains Off and 5 is Wave.
@@ -9,6 +10,7 @@
 const IDLE_DELAY_MS = 300000;
 const RETURN_FADE_MS = 2000;
 const LIGHT_TIMER_ID = 421;
+const BACKSPACE_TIMER_ID = 422;
 var fnHeld;
 var guardHeld;
 var held[31];
@@ -38,6 +40,20 @@ var selectorActive;
 var confirmationColor;
 var confirmationLed;
 var brightnessSelectorActive;
+var backspaceStart;
+var backspaceLast;
+
+func backspaceTick() {
+  if (held[27] != SC_BACKSPACE+65 || isUsbSuspended() || !isUsbConnected()) {
+    stopTimer(BACKSPACE_TIMER_ID); return;
+  }
+  var now = getTime();
+  if (((now-backspaceStart)&0x7fffffff) >= 400 &&
+      ((now-backspaceLast)&0x7fffffff) >= 50) {
+    pressScanCode(SC_BACKSPACE); releaseScanCode(SC_BACKSPACE);
+    backspaceLast = now; lastActivity = now;
+  }
+}
 
 func smoothLevel(t) var {
   if (t < 0) { return 0; }
@@ -281,6 +297,7 @@ func patternButton() {
 }
 
 func init() {
+  stopTimer(BACKSPACE_TIMER_ID);
   fnHeld = 0; guardHeld = 0; activeCount = 0; hasActivity = 0;
   chordLatched = 0; chordTarget = -1;
   idlePattern = 0; chosenBrightness = 20; selectorActive = 0;
@@ -291,7 +308,9 @@ func init() {
   setEnableButtonStates(1);
   lightsOff();
   setScript(SCRIPT_ID_CONNECTION_UPDATE, @{
-    if (isUsbSuspended() || !isUsbConnected()) { lightsOff(); }
+    if (isUsbSuspended() || !isUsbConnected()) {
+      stopTimer(BACKSPACE_TIMER_ID); lightsOff();
+    }
   });
 }
 
@@ -337,10 +356,19 @@ func pressMapped(button, normal, alternate) {
     if (lightMode && !blinkActive) { allLeds(0, 255, 0); }
   }
   if (action > 0 && action <= 64) { pressStenoKey(action-1); }
-  if (action >= 65) { pressScanCode(action-65); }
+  if (action >= 65) {
+    pressScanCode(action-65);
+    if (button == 27) {
+      // Release immediately so the host cannot add uncounted autorepeats.
+      releaseScanCode(action-65);
+      backspaceStart = getTime(); backspaceLast = backspaceStart;
+      startTimer(BACKSPACE_TIMER_ID, 25, 1, @{ backspaceTick(); });
+    }
+  }
 }
 
 func releaseMapped(button) {
+  if (button == 27) { stopTimer(BACKSPACE_TIMER_ID); }
   var action = held[button];
   held[button] = 0;
   if (action >= 1000) {
