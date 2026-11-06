@@ -44,6 +44,13 @@ Use [travel-cap.SLDPRT](solidworks/travel-cap.SLDPRT), [travel-cap.step](step/tr
 
 The cap adds **2.54 mm (0.1") of height** over the previous design. The hooks and loops are on the opposite sides from the previous cap, the loops span the taller walls, and the hooks are centered vertically. A horizontal hook sits between the two loops to provide another retaining-band attachment point.
 
+<p>
+  <img src="../images/travel-cap-interior.jpg" alt="Travel cap interior showing ribs and retaining-band anchors" width="300">
+  <img src="../images/travel-cap-cable-storage.jpg" alt="USB cable held against the closed travel cap beneath its retaining bands" width="300">
+</p>
+
+Cap interior with retaining-band anchors (left), and a USB cable held against the closed cap by the bands (right).
+
 The earlier cap's mesh and sliced jobs are in the [archive guide](../../archive/README.md#previous-travel-cap).
 
 ## STEP references

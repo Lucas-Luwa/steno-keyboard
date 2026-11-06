@@ -76,3 +76,7 @@ Completed keyboard with the PCB mounted in the case.
 ## 6. Fit the travel cap
 
 The [travel cap](mechanical/README.md#current-travel-cap) uses rubber-band retention. Route the band through the loops, under the base and onto a hook, seated behind its tip. The side hooks and horizontal center hook provide alternative attachment points; band tension should hold the cap without depressing the keys.
+
+<img src="images/travel-cap-secured.jpg" alt="Closed travel cap secured with two rubber bands routed through its anchors" width="400">
+
+Travel cap secured with two rubber bands.
